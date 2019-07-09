@@ -32,6 +32,14 @@
 
 ### 3.2. Crawling(크롤링)
 
+웹 브라우저에서 원하는 데이터를 받아 오는 것을 크롤링이라고 한다.
+
+크롤링을 하더라도 모든 정보를 받아올 수 있는 것이 아니고 원하는 정보만 얻어 오는 것이 아니므로,
+
+받아온 데이터를 정제하는 과정이 필요하다.
+
+
+
 #### 3.2.1. 웹브라우저 열기
 
 ```python
@@ -56,14 +64,35 @@ for i in idol:
 
 
 
-#### 3.2.3. 정보 스크랩
+#### 3.2.3. 크롤링에 필요한 모듈 설치
+
+>$ pip install requests --user
+>$ pip list
+>$ pip install bs4 --user
+
+
+
+#### 3.2.4. 정보 스크랩
 
 ```python
 # 정보 스크랩
-import webbrowser
+import requests
 
-requests.get('https://naver.com').text			# 주소에 요청해서 정보 받아서 글만 얻음
+requests.get('https://naver.com').text			# 주소에 요청해서 정보 받아서 text만 얻어옴
 requests.get('https://naver.com').status_code	# 요청을 잘 보내면 200을 받음
+```
+
+
+
+#### 3.2.5. 
+
+```python
+import bs4
+
+text = bs4.BeautifulSoup(문서)	
+text.select('selector')			# 문서 안에 있는 특정 내용을 뽑아줘(select)
+text.select_one('selector')	# 문서 안에 있는 특정 내용을 하나만 뽑아줘(select_one)
+
 ```
 
 
@@ -225,24 +254,7 @@ Python IDLE : python으로 내 컴퓨터를 조작하는 툴
 
 
 
-console> pip install requests --user
-
-console> pip list
-
-console> pip install bs4 --user
-
 #### 크롤링
-
-```python
-import bs4
-
-text = bs4.BeautifulSoup(문서)
-text.select(selector) # 문서 안에 있는 특정 내용을 뽑아줘(select)
-text.select_one(selector) # 문서 안에 있는 특정 내용을 하나만 뽑아줘(select_one)
-
-```
-
-
 
 ```python
 # 현재의 코스피 지수 받아오기
