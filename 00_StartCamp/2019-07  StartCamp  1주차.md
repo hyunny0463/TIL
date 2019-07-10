@@ -75,7 +75,6 @@ for i in idol:
 #### 3.2.4. 정보 스크랩
 
 ```python
-# 정보 스크랩
 import requests
 
 requests.get('https://naver.com').text			# 주소에 요청해서 정보 받아서 text만 얻어옴
@@ -84,7 +83,7 @@ requests.get('https://naver.com').status_code	# 요청을 잘 보내면 200을 �
 
 
 
-#### 3.2.5. 
+#### 3.2.5. Selector
 
 ```python
 import bs4
@@ -92,172 +91,13 @@ import bs4
 text = bs4.BeautifulSoup(문서)	
 text.select('selector')			# 문서 안에 있는 특정 내용을 뽑아줘(select)
 text.select_one('selector')	# 문서 안에 있는 특정 내용을 하나만 뽑아줘(select_one)
-
 ```
 
 
 
-### 3.3. Package
-
-
-
-## 4. 마크다운(typora) 사용법
-
-### 1.1. Text
-
-#### 1.1.1. Italic
-
-*기울임체를 사용하기 위해 사용한다.*
-
-특수문자 `*` 그리고 `_` 를 사용하거나, `ctrl + i` 단축키를 사용해도 된다.
-
-```
-*기울임체를 사용하려면 이렇게 하세요*
-_기울임체를 사용하려면 이렇게 하세요_
-```
-
-
-
-#### 1.1.2. Bold
-
-**글자를 굵은 글꼴로 바꿀 때 사용한다.**
-
-특수문자 `**` 를 사용하거나, `ctrl + b` 단축키를 사용해도 된다.
-
-```
-**볼드체를 사용하려면 이렇게 하세요**
-```
-
-
-
-#### 1.1.3. Strikethrough
-
-~~글자에 취소선을 넣을 때 사용한다.~~
-
-특수문자 `~` 를 사용하거나, `alt + shift + 5` 단축키를 사용해도 된다.
-
-```
-~~취소선을 넣으려면 이렇게 하세요~~
-```
-
-
-
-### 1.2. Headers
-
-문서 제목을 표현할 때 사용한다.
-
-각 행에서 맨 앞에 `#` 을 넣어 사용할 수 있다.
-
-```
-# This is a H1			# Ctrl + 1
-## This is a H2			# Ctrl + 2
-### This is a H3		# Ctrl + 3
-#### This is a H4		# Ctrl + 4
-##### This is a H5		# Ctrl + 5
-###### This is a H6		# Ctrl + 6
-```
-
-
-
-### 1.3. Quotation
-
-인용문을 사용할 때 사용한다.
-
-각 행에서 맨 앞에 `>` 을 넣어 사용할 수 있다.
-
-
-
-> *The gratification comes in the doing, not in the results." - James dean*
->
-> *만족은 결과가 아니라 과정에서 찾아온다. - 제임스 딘*
-
-
-
-### 1.4. Code
-
-#### 1.4.1. Short source code
-
-간단한 소스코드를 한 줄 입력할 때 사용한다.
-
-소스코드에 ` `` ` 를 둘러싸서 사용한다.
-
-`print('Hello, SSAFY!')`
-
-
-
-#### 1.4.2. Complete source code
-
-긴 소스코드를 입력할 떄 사용한다.
-
-소스코드를 ` ``` ` 입력하고 `enter`를 친 후 넣으면 된다.
-
-```c++
-#include <iostream>
-using namespace std;
-
-int main(int argc, char** argv)
-{
-    cout << "Hello, SSAFY!" << '\n';
-    return 0;
-}
-```
-
-
-
-### 1.5. Link
-
-markdown 문서에 링크를 걸고 싶을 때 사용한다.
-
-#### 1.5.1. 일반 링크
-
-일반 링크는 하나의 링크를 연결할 때 사용한다.
-
-`[링크 이름](실제 주소)` 의 규칙으로 작성하면 된다.
-
-[hyunny0463님의 github](https://github.com/hyunny0463)
-
-
-
-#### 1.5.2. 참조 링크
-
-참조 링크는 하나의 링크를 여러번 참조하고 싶을 때 사용한다.
-
-`[링크 이름][숫자]` 로 링크를 작성하고, 추가적으로 `[숫자]:{실제 주소}` 로 원하는 링크를 입력한다.
-
-[hyunny0463님의 github][1]
-
-[몰라유][1]
-
-[1]:https://github.com/hyunny0463
-
-
-
-### 1.6. Image
-
-markdown 문서에 이미지를 넣을 때 사용한다.
-
-`![그림 설명](이미지 링크)` 를 입력해서 사용할 수 있다.
-
-![보노보노](https://w.namu.la/s/fbe29c52a03345a112f33d89632e39735b30e9cd3d85346db314841d27e13f5148542ea262ae9fcd04c1a5c86c1a07586e381983ef8c4ce600ea9378fe4066a25cc2e64018bafc2c25079d9da6f45d9e40df135269a0c1d669fcb7079620552f)
-
-
-
-### 1.7. etc
-
-`ctrl + /`	:	markdown 문서로 작성된 문서의 소스코드를 볼 수 있다.
-
-### 9일
-
-Python IDE ( Integrated Development Enviroment) : 파이썬 통합 개발 환경
-
-Python IDLE : python으로 내 컴퓨터를 조작하는 툴
-
-
-
-#### 크롤링
+#### 3.2.6. 코스피 지수 크롤링
 
 ```python
-# 현재의 코스피 지수 받아오기
 import requests
 from bs4 import BeautifulSoup # bs4 module 에서 BeautifulSoup 함수를 가져옴
 
@@ -273,8 +113,9 @@ print(f'오늘의 코스피 지수는 {kospi}입니다.')
 
 
 
+#### 3.2.7. 원/환율 크롤링
+
 ```python
-# 현재의 원/환율 받아오기
 import requests
 from bs4 import BeautifulSoup
 
@@ -288,8 +129,9 @@ print(f'현재의 원/달러 환율은 {exchange.text}입니다')
 
 
 
+#### 3.2.8. 실시간 검색어 크롤링
+
 ```python
-# 실시간 검색어 받아오기
 import requests
 from bs4 import BeautifulSoup
 
@@ -304,13 +146,13 @@ for idx, name in enumerate(names):
 
 
 
-
+#### 3.2.9. 정리
 
 **API는 충분히 친절하다.**
 
-- 우리가 hacking 할 수 있다면 얼마든지 가져다 쓸 수 있다.(무료라고는 안함)
+우리가 hacking 할 수 있다면 얼마든지 가져다 쓸 수 있다. 하지만 모두 무료는 아니다.
 
-**하지만 더 쉬운 방법이 있는데. 그것은 파이썬 패키지**
+Python Package 는 더 쉬운 방법이다.
 
 
 
@@ -328,23 +170,214 @@ for idx, name in enumerate(names):
 
 
 
-## GIT
+### 3.3. 파일
 
-분산 버전 관리 프로그램으로 코드의 history를 관리하는 도구
+#### 3.3.1. 파일 쓰기
 
-프로젝트 이전 버전을 복원, 변경, 분석 및 병합까지 가능하다.
-
-
-
-`add`	커밋할 목록에 추가
-
-`commit`	커밋(create a snapshot) 만들기
-
-`push`	현재까지의 역사 (commits)가 기록되어 있는 곳에 새로 생성한 커밋들 반영하기
+#### 3.3.2. 파일 읽기
 
 
 
-`$git add helloworld.py`
+### 3.4. Package
+
+
+
+## 4. 마크다운(typora) 사용법
+
+### 4.1. Text
+
+#### 4.1.1. Italic
+
+*기울임체를 사용하기 위해 사용한다.*
+
+특수문자 `*` 그리고 `_` 를 사용하거나, `ctrl + i` 단축키를 사용해도 된다.
+
+```
+*기울임체를 사용하려면 이렇게 하세요*
+_기울임체를 사용하려면 이렇게 하세요_
+```
+
+
+
+#### 4.1.2. Bold
+
+**글자를 굵은 글꼴로 바꿀 때 사용한다.**
+
+특수문자 `**` 를 사용하거나, `ctrl + b` 단축키를 사용해도 된다.
+
+```
+**볼드체를 사용하려면 이렇게 하세요**
+```
+
+
+
+#### 4.1.3. Strikethrough
+
+~~글자에 취소선을 넣을 때 사용한다.~~
+
+특수문자 `~` 를 사용하거나, `alt + shift + 5` 단축키를 사용해도 된다.
+
+```
+~~취소선을 넣으려면 이렇게 하세요~~
+```
+
+
+
+### 4.2. Headers
+
+문서 제목을 표현할 때 사용한다.
+
+각 행에서 맨 앞에 `#` 을 넣어 사용할 수 있다.
+
+```
+# This is a H1			# Ctrl + 1
+## This is a H2			# Ctrl + 2
+### This is a H3		# Ctrl + 3
+#### This is a H4		# Ctrl + 4
+##### This is a H5		# Ctrl + 5
+###### This is a H6		# Ctrl + 6
+```
+
+
+
+### 4.3. Quotation
+
+인용문을 사용할 때 사용한다.
+
+각 행에서 맨 앞에 `>` 을 넣어 사용할 수 있다.
+
+
+
+> *The gratification comes in the doing, not in the results." - James dean*
+>
+> *만족은 결과가 아니라 과정에서 찾아온다. - 제임스 딘*
+
+
+
+### 4.4. Code
+
+#### 4.4.1. Short source code
+
+간단한 소스코드를 한 줄 입력할 때 사용한다.
+
+소스코드에 ` `` ` 를 둘러싸서 사용한다.
+
+`print('Hello, SSAFY!')`
+
+
+
+#### 4.4.2. Complete source code
+
+긴 소스코드를 입력할 떄 사용한다.
+
+소스코드를 ` ``` ` 입력하고 `enter`를 친 후 넣으면 된다. 단축키는 `ctrl + shift + K` 
+
+```c++
+#include <iostream>
+using namespace std;
+
+int main(int argc, char** argv)
+{
+    cout << "Hello, SSAFY!" << '\n';
+    return 0;
+}
+```
+
+
+
+### 4.5. Link
+
+markdown 문서에 링크를 걸고 싶을 때 사용한다.
+
+#### 4.5.1. 일반 링크
+
+일반 링크는 하나의 링크를 연결할 때 사용한다.
+
+`[링크 이름](실제 주소)` 의 규칙으로 작성하면 된다.
+
+[hyunny0463님의 github](https://github.com/hyunny0463)
+
+
+
+#### 4.5.2. 참조 링크
+
+참조 링크는 하나의 링크를 여러번 참조하고 싶을 때 사용한다.
+
+`[링크 이름][숫자]` 로 링크를 작성하고, 추가적으로 `[숫자]:{실제 주소}` 로 원하는 링크를 입력한다.
+
+[hyunny0463님의 github][1]
+
+[몰라유][1]
+
+[1]:https://github.com/hyunny0463
+
+
+
+### 4.6. Image
+
+markdown 문서에 이미지를 넣을 때 사용한다.
+
+`![그림 설명](이미지 링크)` 를 입력해서 사용할 수 있다.
+
+![보노보노](https://w.namu.la/s/fbe29c52a03345a112f33d89632e39735b30e9cd3d85346db314841d27e13f5148542ea262ae9fcd04c1a5c86c1a07586e381983ef8c4ce600ea9378fe4066a25cc2e64018bafc2c25079d9da6f45d9e40df135269a0c1d669fcb7079620552f)
+
+
+
+### 4.7. etc
+
+`ctrl + /`	:	markdown 문서로 작성된 문서의 소스코드를 볼 수 있다.
+
+
+
+## 5. Git
+
+> 분산 버전 관리 프로그램으로 코드의 history를 관리하는 도구
+>
+> 프로젝트 이전 버전을 복원, 변경, 분석 및 병합까지 가능하다.
+
+
+
+### 5.1. Git initialization
+
+#### 5.1.1 Git에 내 정보 설정
+
+* `$ git config --global user.name 'seohyun'`
+
+* `$ git config -- global user.email 'hyunny0463@gmail.com'`
+* `$ git config --global --list`
+  * git에 설정된 유저 정보 보기
+
+
+
+#### 5.1.2. 새로운 Git 파일 생성
+
+- `$ git init`
+  - git 초기화, 지금 위치한 폴더를 git으로 관리하겠다는 의미
+
+
+
+#### 5.1.3. Git Clone
+
+- `$ git clone https://github.com/hyunny0463/TIL.git` 
+  - 주소로 부터 현재 폴더에 git repository를 내려받는다.
+  - `git clone` 해 오면 git 폴더로 설정되어 추가적으로 `git init`, `git remote add` 할 필요가 없다.
+
+
+
+### 5.2. Git command
+
+#### 5.2.1. Git 상태 알아보기
+
+* `$ git status` 
+  * 현재 폴더의 git 상태 확인 untracked(새로 생성된 파일), modified(수정된 파일)
+
+* `add`	커밋할 목록에 추가
+
+* `commit`	커밋(create a snapshot) 만들기
+
+* `push`	현재까지의 역사 (commits)가 기록되어 있는 곳에 새로 생성한 커밋들 반영하기
+
+
 
 `$git commit -m` 	-로 시작하면 보통 short name 옵션
 
@@ -352,13 +385,7 @@ for idx, name in enumerate(names):
 
 
 
-### git initialization
 
-`$git config --global user.name 'seohyun'`
-
-`$git config -- global user.email 'hyunny0463@gmail.com'`
-
-`$git config --global --list`
 
 `$git add . `
 
@@ -366,17 +393,43 @@ for idx, name in enumerate(names):
 
 `$git commit -m "first commit"`
 
-`$git remote add origin`
+`$git remote add origin [주소]`
 
 `$git push origin master`
 
-`$git clone [주소]`
+
+
+### 5.3. gitignore
 
 
 
-### gitignore
 
 
 
 
+csv = comma seperated value
+
+
+
+## HTML (Hyper Text Markup Language)
+
+> 옛날에는 글을 선형적으로(순서대로) 읽었습니다.
+>
+> 여기서 하이퍼 텍스트라는 것은 링크로 넘나든다는 것입니다. 
+
+
+
+## CSS (Cascade Style Sheet)
+
+>
+>
+>
+
+
+
+## BOOTSTRAP
+
+>
+>
+>
 
