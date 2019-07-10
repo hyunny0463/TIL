@@ -319,7 +319,7 @@ markdown 문서에 이미지를 넣을 때 사용한다.
 
 `![그림 설명](이미지 링크)` 를 입력해서 사용할 수 있다.
 
-![보노보노](https://w.namu.la/s/fbe29c52a03345a112f33d89632e39735b30e9cd3d85346db314841d27e13f5148542ea262ae9fcd04c1a5c86c1a07586e381983ef8c4ce600ea9378fe4066a25cc2e64018bafc2c25079d9da6f45d9e40df135269a0c1d669fcb7079620552f)
+![보노보노](https://user-images.githubusercontent.com/12672315/60955063-0e4f8080-a33b-11e9-94de-a91306b579d0.jpeg)
 
 
 
@@ -369,7 +369,9 @@ markdown 문서에 이미지를 넣을 때 사용한다.
 #### 5.2.1. Git 상태 알아보기
 
 * `$ git status` 
-  * 현재 폴더의 git 상태 확인 untracked(새로 생성된 파일), modified(수정된 파일)
+  * 현재 폴더의 git 상태 확인
+  * untracked(*{unstaged}*새로 생성된 파일), new file(*{staged}*새로 생성된 파일)
+  * (빨강)modified(*{unstaged}*수정된 파일), (초록)modified({staged}수정된 파일)
 
 * `add`	커밋할 목록에 추가
 
@@ -432,4 +434,14 @@ csv = comma seperated value
 >
 >
 >
+
+
+
+## Flask
+
+> $ pip install flask --user
+
+
+
+> $ FLASK_APP=Hello.py flask run
 
