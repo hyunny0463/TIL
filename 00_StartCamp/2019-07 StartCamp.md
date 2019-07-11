@@ -1,5 +1,7 @@
 # 2019-07 | StartCamp | 1주차
 
+
+
 ## 1. 4차산업혁명과 소프트웨어
 
 ## 2. 파이썬 프로그래밍의 개념과 문법
@@ -260,7 +262,7 @@ _기울임체를 사용하려면 이렇게 하세요_
 
 간단한 소스코드를 한 줄 입력할 때 사용한다.
 
-소스코드에 ` `` ` 를 둘러싸서 사용한다.
+소스코드에 `` ` `` 를 둘러싸서 사용한다. 단축키는 ``ctrl + shift +` ``
 
 `print('Hello, SSAFY!')`
 
@@ -319,13 +321,27 @@ markdown 문서에 이미지를 넣을 때 사용한다.
 
 `![그림 설명](이미지 링크)` 를 입력해서 사용할 수 있다.
 
+이미지가 깨진다면 `repository > issue > new issue > 이미지 드래그&드롭 > [주소]` 를 활용한다.
+
 ![보노보노](https://user-images.githubusercontent.com/12672315/60955063-0e4f8080-a33b-11e9-94de-a91306b579d0.jpeg)
 
 
 
 ### 4.7. etc
 
-`ctrl + /`	:	markdown 문서로 작성된 문서의 소스코드를 볼 수 있다.
+`ctrl + shift + 1 ~ 3`		:	파일의 목차와 파일트리를 볼 수 있다.
+
+`ctrl + /`								:	markdown 문서로 작성된 문서의 소스코드를 볼 수 있다.
+
+`---` `___` `***`						:	아래와 같은 horizontal rule을 생성할 때 사용할 수 있다.	
+
+***
+
+___
+
+---
+
+
 
 
 
@@ -366,17 +382,27 @@ markdown 문서에 이미지를 넣을 때 사용한다.
 
 ### 5.2. Git command
 
-#### 5.2.1. Git 상태 알아보기
+#### 5.2.1. status
+
+현재의 폴더에 있는 git 상태를 확인할 때 사용한다.
 
 * `$ git status` 
   * 현재 폴더의 git 상태 확인
-  * untracked(*{unstaged}*새로 생성된 파일), new file(*{staged}*새로 생성된 파일)
-  * (빨강)modified(*{unstaged}*수정된 파일), (초록)modified({staged}수정된 파일)
+  * untracked(`{unstaged}`새로 생성된 파일), new file(`{staged}`새로 생성된 파일)
+  * (빨강색)modified(`{unstaged}`수정된 파일), (초록색)modified(`{staged}`수정된 파일)
 
-* `add`	커밋할 목록에 추가
+#### 5.2.2. add
 
-* `commit`	커밋(create a snapshot) 만들기
+* `$ git add [파일 이름]`
+* 각각의 파일을 추가해주기 위해서는 `[파일 이름]`으로 추가해준다.
+* `$ git add .`
+  * 새로 만든 파일이거나 수정된 모든 파일을 `{unstaged}` 에서 `{staged}` 상태로 변경해준다.
 
+
+
+#### 5.2.3. commit
+
+* `$git commit`	커밋(create a snapshot) 만들기
 * `push`	현재까지의 역사 (commits)가 기록되어 있는 곳에 새로 생성한 커밋들 반영하기
 
 
@@ -407,8 +433,6 @@ markdown 문서에 이미지를 넣을 때 사용한다.
 
 
 
-
-
 csv = comma seperated value
 
 
@@ -425,7 +449,7 @@ csv = comma seperated value
 
 >
 >
->
+>HTML을 스타일링 해주는 친구
 
 
 
@@ -444,4 +468,6 @@ csv = comma seperated value
 
 
 > $ FLASK_APP=Hello.py flask run
+
+
 
