@@ -429,7 +429,7 @@ ___
 
 ### 5.3. gitignore
 
-
+github 사이트에서 gitignore를 정해둔게 있음, google에 python gitignore로 가지고 와도 됨
 
 
 
@@ -470,4 +470,38 @@ csv = comma seperated value
 > $ FLASK_APP=Hello.py flask run
 
 
+
+어제
+
+오전 : 가장 기본적으로 hello world 플라스크 설치하고 서버를 키고 특정 주소로 들어가니까 헬로 월드가 떴죠
+
+랜덤 샘플을 가지고 음식중에 몇개만 선택했고 그 중에 variable routing 을 사용했다
+
+필요하다면 templates에서 가져다 사용할 수 있게했다. render_templates를 이용해서 .html을 보여주는 것을 했고, render_templates를 이용해서 사용하고 싶은 변수를 인자를 넘겨줌 그래서 html에서도 사용가능 했죠
+
+ascii artii 실습했죠 정해진 방식에 맞게 요청을 보내고 요청을 받아서 그 데이터를 이용함
+
+그 때 사용한 것이 request와 respond.
+
+그리고 dictionary 문제를 풀어봤음. dictionary에서 사용하는 method를 사용했음 .items(), keys(), values()
+
+key를 가져올 때 [] 사용해서 가져오는 것과 .get을 이용해서 가져오는 2가지 방법을 사용했음
+
+어제는 [] 만 썼지만 이제는 .get 으로 대부분 가져올 것이다. []는 중간에 데이터가 없다면 error가 나지만 .get으로 가져온다면 error가 나지 않는다 error가 난다는 것은 프로그램이 중간에 멈추는 것이다.
+
+
+
+오늘은 telegram chatbot을 만들 것입니다. telegram은 kakaotalk보다 훨씬 보안이 우수합니다.
+
+오늘 우리가 하는 내용에는 굉장히 다양하고 많은 내용이 담겨있습니다. 그걸 해보기에 telegram chatbot이 굉장히 좋습니다. 보여주기 좋습니다. 어제한 flask에서 html 보여주는 것만이 아니라 telegram chatbot 같은 것도 웹 서비스입니다.
+
+앞으로는 우리가 token을 받게 될 것입니다. token은 하루에 정보를 요청할 수 있는 횟수일 수도 있습니다. 우리가 token을 받고 github 사이트에 올리면 다른 사람들이 볼 수 있게 되겠죠? 이런 것도 문제가 발생할 수 있는데 해커들이 이런 소스를 긁어올 수 있는데 우리가 사용하지 않아도 이런 해커들 때문에 계속 요금이 발생할 수 있습니다. 이것을 예방하기 위해서 .gitignore에 글자를 적어넣어 이런 token을 github에 올리지 않도록 합니다.
+
+오늘은 지금까지 한 것과는 차원이 다른 외계어 같은 것을 하게 됩니다. 하지만 뒤에 돌아와서는 이해가 될 지도 모르겠습니다.
+
+token의 보안이 중요하니깐 .env 파일에 token을 적어 놓는다 이 파일을 git이 관리하지 않는다.
+
+
+
+웹훅?
 

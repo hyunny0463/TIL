@@ -5,7 +5,7 @@ headers = { # 브라우저가 헤더를 보내주는 경우도 있지만 직접 
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36'
 }
 
-response = requests.get('https://wtww.melon.com/chart/index.htm', headers = headers)
+response = requests.get('https://www.melon.com/chart/index.htm', headers = headers)
 # 4로 시작한 오류는 클라이언트 오류 5로 시작하면 서버오류
 response.encoding = 'utf-8'
 res = response.text
