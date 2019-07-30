@@ -171,7 +171,7 @@ style: 인라인 스타일을 요소에 지정
 
 
 
-#### 2.2.5. Dom트리
+#### 2.2.5. Dom Tree ( Document Object Model )
 
 body 태그와 h1태그는 부모(parent)-자식(child)관계
 
@@ -229,6 +229,12 @@ h1 태그와 ul 태그는 형제 관계(sibling)
 <b></b>
 ```
 
+```html
+<i></i>
+```
+
+
+
 
 
 #### 2.3.2. 레이아웃 태그
@@ -246,8 +252,20 @@ h1 태그와 ul 태그는 형제 관계(sibling)
 #### 2.3.3. 링크 태그
 
 ```html
-<a href="google.com"/>
+<a href="google.com"/>구글</a>
 ```
+
+```html
+<!-- 새 탭에 열기 -->
+<a href="google.com" target="_blank"></a>
+```
+
+```html
+<!-- HTML 파일 열기 -->
+<a href="index.html">[참고 사이트]</a>
+```
+
+
 
 
 
@@ -256,7 +274,7 @@ h1 태그와 ul 태그는 형제 관계(sibling)
 img 태그에 사용되는 추가 속성
 
 1. tabindex: 사용자가 탭을 누를 때의 순서 지정
-2. alt: 이미지가 로드되지 않을 때 보여지는 문구
+2. alt: 이미지가 로드되지 않을 때 보여지는 문구 (웹 접근성에서 중요)
 3. width: 이미지 너비 지정
 4. height: 동영상의 높이 지정
 5. poster: 동영상 준비 중에 표시될 이미지 경로
@@ -278,7 +296,114 @@ iframe  태그에 사용되는 추가 속성
 <iframe src="https://www.w3schools.com"></iframe>
 ```
 
+```html
+<iframe width="893" height="502" src="https://www.youtube.com/embed/VcIs0Lvbsj4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+```
 
+
+
+### 2.4. Table
+
+`<table border=""></table>`
+
+```html
+<!-- table & table border -->
+<table border="1px solid black">
+    <!-- table row -->
+    <tr>
+        <!-- table header -->
+        <th></th>
+        <th>월</th>
+        <th>화</th>
+        <th>수</th>
+    </tr>
+    <tr>
+        <!-- table data -->
+        <td>A chef</td>
+        <td rowspan="2">짬뽕</td>
+        <td colspan="2">초밥</td>
+    </tr>
+    <tr>
+        <td>B Chef</td>
+        <td>김치찌개</td>
+        <td>삼계탕</td>
+    </tr>
+</table>
+```
+
+
+
+### 2.5. Form
+
+`<form action=""></form>`
+
+#### 2.5.1. Text type
+
+```html
+<form action="">
+    <!-- placeholder: 입력 전 입력창에 적혀있는 글 -->
+    TEXT: <input type="text" placeholder="내용을 입력해주세요."><br>
+    NUMBER: <input type="text"><br>
+    PASSWORD: <input type=""><br>
+    EMAIL: <input type="text"><br>
+    DATE: <input type="text">
+</form>
+```
+
+inline level element 이므로 `<br>` 해줘야 함
+
+
+
+#### 2.5.2. Radio type
+
+```html
+<form action="">
+    <input type="radio" name="language" disabled><br>
+    <input type="radio" name="language"><br>
+    <input type="radio" name="language">
+</form>    
+```
+
+disabled> 선택하지 못하는 옵션
+
+
+
+#### 2.4.3. Checkbox type
+
+```html
+<form action="">
+    한국: <input type="checkbox"><br>
+    일본: <input type="checkbox">
+</form>
+```
+
+
+
+#### 2.5.4. Select
+
+```html
+<form action="">
+    <select name="country">
+        <option value="한국" selected>한국</option>
+        <option value="중국">중국</option>
+        <option value="일본" disabled>일본</option>
+    </select>
+</form>
+```
+
+selected> 기본으로 선택되어 있는 옵션
+
+disabled> 선택하지 못하는 옵션
+
+
+
+#### 2.5.5. Submit type
+
+```html
+<form action="">
+    <input type="submit" value="제출">
+</form>
+```
 
 
 
@@ -286,7 +411,268 @@ iframe  태그에 사용되는 추가 속성
 
 ## 3. CSS ( <u>C</u>ascading <u>S</u>tyle <u>S</u>heet )
 
+HTML은 정보와 구조화
 
+CSS는 Styling 정의
+
+각자는 문법이 다른 별개의 언어임
+
+
+
+기본 사용법 - 선언
+
+ `h1{color:blue; font-size: 15px;}`
+
+h1 : 셀렉터(selector>)
+
+color: blue <- 선언
+
+color: 프로퍼티(property)
+
+blue: 값(value)
+
+
+
+기본 사용법 - 주석
+
+`/* 주석은 이 사이에 적어 주세요.*/`
+
+
+
+CSS 활용하기 1.Inline(인라인)
+
+```html
+<body>
+	<h1 style="color:blue, font-size:100px">This is my site</h1>
+</body>
+```
+
+
+
+CSS 활용하기 1.Embedding(내부참조)
+
+```html
+<style>
+    h1{
+        color:blue;
+        font-size:100px;
+    }
+</style>
+```
+
+
+
+CSS 활용하기 3.link file(외부참조)
+
+외부에 있는 CSS 파일을 로드하기
+
+```html
+<head>
+    <link rel="stylesheet" href="test.css">
+</head>
+```
+
+
+
+
+
+컴포넌트화 - 일반적으로 외부 파일로서 사용한다.
+
+- 글씨 크기 조정하는 CSS, 각각의 색을 조정하는 CSS 등 스타일링 요소를 CSS 파일별로 분류함
+
+
+
+*(selector) 전체에 적용시킴, 전체 선택자
+
+```css
+* {
+    color: darksalmon;
+    font-size: 25px;
+}
+```
+
+
+
+.class값: 클래스 선택자
+
+```html
+<ul class="favorite">
+    <li>Justin</li>
+    <li>Justin</li>
+</ul>
+```
+
+```css
+.favorite {
+    color:purple;
+}
+```
+
+
+
+#id ID 선택자
+
+```html
+<head>
+    <title>Document</title>
+</head>
+```
+
+```css
+#title {
+    color: red;
+}
+```
+
+
+
+후손/자식 셀렉터
+
+- 자식 셀렉터(>): 해당 태그 내에 있는 직계 자식 요소만 선택
+- 후손 셀렉터 (공백): 해당 태그 내의 모든 요소를 선택
+
+
+
+Box model
+
+margin: 테두리 바깥의 외부 여백, 배경색을 지정할 수 없다.
+
+border: 테두리 영역
+
+padding: 테두리 안쪽의 내부 여백 요소에 적용된 배경의 컬러, 이미지는 패딩까지 적용
+
+content: 실제 내용이 위치
+
+
+
+기본 박스모델 활용 — margin
+
+```css
+.margin {
+    margin-top: 10px;
+    margin-right: 20px;
+    margin-bottom: 30px;
+    margin-left: 40px;
+}
+```
+
+```css
+/*상, 하, 좌, 우: 10px*/
+.margin-1 {	margin: 10px;}
+/*상, 하: 10px, 좌, 우: 20px*/
+.margin-2 {	margin: 10px 20px;}
+/*상: 10px, 하: 20px, 좌, 우: 30px*/
+.margin-3 {	margin: 10px 20px 30px;}
+/*상: 10px, 하: 20px, 좌: 30px, 우: 40px*/
+.margin-4 {	margin: 10px 20px 30px 40px;}
+```
+
+
+
+기본 박스모델 활용 — padding
+
+```css
+.margin-padding {
+    margin: 10px;
+    padding: 20px;
+}
+```
+
+
+
+
+
+기본 박스모델 활용 — border
+
+```css
+.border {
+    border-width: 2px;
+    border-style: dashed;
+    border-color: red;
+}
+```
+
+
+
+기본 박스모델 활용 — shorthand
+
+```css
+.border {
+    border: 2px dashed black;
+}
+```
+
+
+
+block
+
+항상 새로운 라인에서 시작한다.
+
+너비가 정해지면 나머지를 margin으로 한다.
+
+
+
+margin-right: auto; 우측정렬
+
+margin-left: auto; 좌측정렬
+
+
+
+margin-right: auto; 가운데 정렬
+
+margin-left: auto;
+
+
+
+block 레벨 요소 예
+
+div, h1 ~ h6, p, ol, ul, li, hr ...
+
+
+
+inline
+
+새로운 라인에서 시작하지 않으며 문장의 중간에 들어갈 수 있다.
+
+content의 너비만큼 가로폭을 차지한다.
+
+width, height, margin-top, margin-bottom property를 지정할 수 없다.
+
+상, 하 여백은 line-height로 설정한다.
+
+
+
+inline 레벨 요소 예
+
+span, a, strong, img, br, input, select, textarea, button
+
+
+
+inline-block
+
+block과 inline 레벨 요소의 특징을 모두 갖는다.
+
+inline 레벨 요소처럼 한 줄에 표시 되면서
+
+block에서의 width, height, margin(top, bottom) 속성을 모두 지정할 수 있다. 직접 설정해야 함
+
+
+
+display: None
+
+해당 요소를 화면에 표시하지 않는다.(<u>공간(영역)조차 사라진다</u>)
+
+
+
+visibility: hidden
+
+해당 요소는 화면에서 표시되지 않지만 공간은 차지하고 있다.
+
+
+
+background-image
+
+background-color
 
 
 

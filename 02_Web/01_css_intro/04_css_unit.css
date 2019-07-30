@@ -1,0 +1,19 @@
+h1 {
+    color: blue;
+    font-size: 50%;
+}
+
+div {
+    color: red;
+    font-size: 50%;
+}
+
+ul {
+    color: rgb(48, 199, 66);
+    font-size: 2rem ;
+}
+
+div > h2 {
+    color: skyblue ;
+    font-size: 5em ;
+}
