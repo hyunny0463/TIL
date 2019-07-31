@@ -676,11 +676,143 @@ background-color
 
 
 
+위치
+
+static기본위치
+
+```css
+div {
+    height: 100px;
+    width: 100px;
+    background-color: purple;
+    line-height: 100px;
+    text-align: center;
+}
+```
+
+
+
+relative(상대위치): 기본위치를 기준으로 좌표 프로퍼티(top, bottom ...)를 사용하여 이동할 수 있음(음수도 가능)
+
+```css
+.relative {
+    position: relative;
+    top: 100px;
+    left: 100px;
+}
+```
+
+
+
+absolute(절대위치):
+
+```css
+.parent {
+    position: relative;
+}
+```
+
+```css
+.absolute-child {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+}
+```
 
 
 
 
-## 4. JavaScript
+
+fixed(고정위치): 부모요소와 관계없이 좌표 프로퍼티를 사용하여 위치를 이동시킨다. 스크롤이 이동해도 변하지 않음.
+
+```css
+.fixed {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+```
+
+
+
+
+
+<element>: nth-child(n)
+
+<element> 자식들 중, n번째 자식이 <element>인 경우 선택 아닌 경우는 선택하지 않음!
+
+```css
+/*리스트의 네 번째 리스트가 li가 아니면 바꾸지 않음*/
+ol > li:nth-child(4) {
+    background: blueviolet;
+}
+```
+
+
+
+
+
+<element>:nth-of-type(4)
+
+<element> 자식들 중에서 <element>번째인 요소를 선택
+
+```css
+/*4번째 리스트를 찾아 바꿈*/
+ol > li:nth-of-type(4) {
+    background: blueviolet;
+}
+```
+
+
+
+
+
+## 4. Bootstrap
+
+
+
+**CDN**(Content Delivery(Distribution) Network) 활용을 통해 Bootstrap에 작성된 CSS, JS를 활용하자!
+
+
+
+컨텐츠(CSS, JS, Image, Text 등)을 효율적으로 전달하기 위해
+
+여러 노드에 가진 네트워크에 데이터를 제공하는 시스템.
+
+
+
+개별 end-user의 가까운 서버를 통해 빠르게 전달 가능(지리적 이점)
+
+외부 서버를 활용함으로써 본인 서버의 부하가 적어짐.
+
+CDN은 보통 적절한 수준의 캐시 설정으로 빠르게 로딩할 수 있음.
+
+---
+
+
+
+### grid system
+
+디자인 요소를 일렬 배열할 수 있는 패턴을 만드는 가로 및 세로 선 컬렉션
+
+12개의 열을 한 줄에 표현할 때 몇 개씩 차지하게 할거냐 >> 약수가 가장 많아서 좋음
+
+이 방법으로 각기 다른 화면에 맞는 반응형 웹을 만들 때 사용된다.	
+
+
+
+
+
+
+
+
+
+
+
+
+
+## 5. JavaScript
 
 
 
