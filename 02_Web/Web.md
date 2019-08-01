@@ -407,6 +407,24 @@ disabled> 선택하지 못하는 옵션
 
 
 
+### 2.6. Shortcut
+
+```html
+div.container
+```
+
+```html
+div.container>div.item
+```
+
+```html
+li*(숫자)
+```
+
+
+
+
+
 
 
 ## 3. CSS ( <u>C</u>ascading <u>S</u>tyle <u>S</u>heet )
@@ -802,9 +820,109 @@ CDN은 보통 적절한 수준의 캐시 설정으로 빠르게 로딩할 수 �
 
 
 
+flex
+
+element들의 크기나 위치를 쉽게 잡아주는 도구이다. 이를 이용하면 레이아웃을 효과적으로 표현할 수 있다.
+
+```html
+<style>
+    .container {
+        display: flex;
+    }
+</style>
+```
+
+```html
+flex-direction: row; <!-- item을 가로로 왼쪽부터 쌓음 -->
+flex-direction: row-reverse; <!-- item을 가로로 오른쪽부터 쌓음 -->
+flex-direction: column; <!-- item을 세로로 위쪽부터 쌓음 -->
+flex-direction: column-reverse; <!-- item을 세로로 아래쪽부터 쌓음 -->
+```
+
+```html
+flex-wrap: wrap; <!-- 화면 크기에 따라 item이 반응해서 아래로 내려감 -->
+flex-wrap: wrap-reverse; <!-- 화면 크기에 따라 item이 반응해서 위로 올라감 -->
+```
+
+```html
+justify-content: flex-start; <!--가로로 왼쪽 정렬, 기본값 -->
+justify-content: flex-end; <!--가로로 오른쪽 정렬 -->
+justify-content: center; <!--가로로 가운데 정렬 -->
+justify-content: space-between; <!-- 가운데 공간을 줌 -->
+```
+
+```html
+align-items: flex-start; <!-- 위쪽으로 정렬 -->
+align-items: flex-end;<!-- 아래쪽으로 정렬 -->
+align-items: center;<!-- 세로로 가운데 정렬 -->
+```
+
+```html
+<div class="item" style="align-self: flex-end">001</div> <!-- 단일 요소를 위쪽으로 -->
+<div class="item" style="align-self: flex-start">002</div> <!-- 단일 요소를 아래쪽으로 -->
+```
 
 
 
+우선순위
+
+
+
+#### 1.  !important
+
+```css
+h1 {
+    color: black !important
+}
+```
+
+
+
+#### 2. inline styling
+
+```html
+<h1 style="color: green">쿨라임 피지오</h1>
+```
+
+
+
+#### 3. id로 지정한 속성
+
+```css
+#fizzio {
+    color: yellow;
+}
+```
+
+
+
+#### 4. 클래스 이름으로 지정한 속성
+
+```css
+.cool {
+    color: brown;
+}
+```
+
+
+
+#### 5. 태그 이름으로 지정한 속성
+
+```css
+h1 {
+    color: blue;
+}
+```
+
+
+
+#### 6. 상위 객체에 의한 상속된 속성
+
+```css
+div {
+    color: red;
+}
+```
 
 
 
@@ -813,8 +931,6 @@ CDN은 보통 적절한 수준의 캐시 설정으로 빠르게 로딩할 수 �
 
 
 ## 5. JavaScript
-
-
 
 
 
