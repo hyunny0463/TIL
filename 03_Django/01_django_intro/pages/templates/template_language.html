@@ -1,0 +1,42 @@
+<h3>1. 반복문</h3>
+{% for menu in menus %}
+    <p> {{ menu }} </p>
+{% endfor %}
+<hr>
+
+{% for menu in menus %}
+    <p> {{ forloop.counter }} {{ menu }} </p>
+{% endfor %}
+<hr>
+
+{% for user in empty_list %}
+    <p> {{ user }} </p>
+{% empty %}
+    <p>현재 가입한 유저가 없습니다.</p>
+{% endfor %}
+<hr>
+
+<h3>2. 조건문</h3>
+{% if '짜장면' in menus %}
+    <p>아 역시 짜장면에는 고춧가루지!!</p>
+{% endif %}
+<hr>
+
+{% for menu in menus %}
+    {{ forloop.counter }}번째 도는중....
+    {% if forloop.first %}
+        <p>짜장면 + 고춧가루!</p>
+    {% else %}
+        <p>{{ menu }}</p>
+    {% endif %}
+{% endfor %}
+<hr>
+
+<h3>3. length filter 활용</h3>
+{% for message in messages %}
+    {% if message|length > 5 %}
+        <p>{{ message }}, 글자가 너무 길어요....</p>
+    {% else %}
+        <p>{{ message }}, {{ message|length }}</p>
+    {% endif %}
+{% endfor %}
