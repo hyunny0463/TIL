@@ -1,0 +1,6 @@
+<form action="/user_create/" method="POST">
+    {% csrf_token %}
+    이름: <input type="text" name="name">
+    비번: <input type="password" name="pwd">
+    <input type="submit">
+</form>

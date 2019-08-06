@@ -40,3 +40,36 @@
         <p>{{ message }}, {{ message|length }}</p>
     {% endif %}
 {% endfor %}
+
+<h3>4. lorem ipsum</h3>
+{% lorem %}
+<hr>
+{% lorem 3w %}
+
+<h3>5. 글자수 제한(truncate)</h3>
+<p> {{ my_sentence|truncatewords:3 }} </p>
+
+<h3>6. 글자 관련 필터</h3>
+<p> {{ 'abc'| length }}</p>
+<p> {{ 'ABC'| lower }}</p>
+<p> {{ my_sentence | title }}</p>
+<p> {{ menus | random }}</p>
+<hr>
+
+<h3>7. 연산</h3>
+<p> {{ 4 | add:6 }}</p>
+
+<h3>8. 날짜 표현</h3>
+{{ datetimenow }} <br>
+{% now "DATETIME_FORMAT" %} <br>
+{% now "SHORT_DATETIME_FORMAT" %} <br>
+
+{% now "DATE_FORMAT" %} <br>
+{% now "SHORT_DATE_FORMAT" %} <br>
+
+{% now "Y년 m월 d일 (D) h:i" %} <br>
+
+{{ datetimenow| date:"SHORT_DATE_FORMAT" }} <br>
+
+<h3>9. 링크</h3>
+{{ 'google.com'| urlize}}

@@ -1,0 +1,18 @@
+<h2>이번 주 당첨 번호</h2>
+<!-- {% for real_lotto in real_lottos %}
+    <p>{{ real_lotto }}</p>
+{% endfor %} -->
+<p>{{ real_lottos }}</p>
+
+<h2>당신의 번호</h2>
+<!-- {% for lotto in lottos %}
+    <p>{{ lotto }}</p>
+{% endfor %} -->
+<p>{{ lottos }}</p>
+<hr>
+
+{% if real_lottos == lottos %}
+    <p>True</p>
+{% else %}
+    <p>False</p>
+{% endif %}
