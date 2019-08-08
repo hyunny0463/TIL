@@ -275,6 +275,14 @@ Article.objects.create(title='third', content='django!') # 바로 저장함
 
 
 
+삭제방법
+
+```python
+article.delete()
+```
+
+
+
 db 확인하기
 
 ```python
@@ -303,13 +311,102 @@ Article.objects.filter(title='first').first() # 첫 번째 것만 선택됨
 Article.objects.filter(title='first').last() # 마지막 것만 선택됨 first, last만 가능
 ```
 
+```python
+Article.objects.filter(pk=1) # QuerySet으로 반환해서 id, content 등 조회 불가능
+```
 
 
-get 사용
+
+
+
+get 사용 - 고유한 정보에만 사용한다.
 
 ```python
 Article.objects.get(pk=1) # primary key가 1인 것을 가져옴
 ```
 
 * 존재하지 않는 인덱스를 접근하거나 하나만 가져오는 get함수에서 여러개 가져오는 행위를 할 때 오류가 생기는데 filter는 빈 QuerySet을 반환하고 get은 오류를 발생시킴
+
+
+
+order_by
+
+```python
+Article.objects.order_by('-id') # 내림차순으로 정렬된 QuerySet을 반환함
+```
+
+
+
+인덱싱
+
+```python
+Article.objects.all()[2] # 3번글을 Article 클래스로 반환한다.
+```
+
+
+
+인덱스 슬라이싱
+
+```python
+Article.objects.all()[1:3] # 2번과 3번글을 QuerySet 형태로 반환한다.
+```
+
+
+
+QuerySet으로 반환
+
+```python
+Article.objects.filter(title__contains='fir') # title에 'fir'이 포함되어 있으면 반환
+```
+
+```python
+Article.objects.filter(title__startswith='first') # title이 'fitst'로 시작하면 반환
+```
+
+
+
+```python
+Article.objects.filter(content__endswith='!') # content 마지막에 '!'이 있으면 반환
+```
+
+
+
+관리자 계정 생성: `python manage.py createsuperuser`
+
+```python
+# admin.py
+from django.contrib import admin
+from .models import Article
+
+class ArticleAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'content', 'created_at', 'updated_at')
+
+admin.site.register(Article, ArticleAdmin)
+```
+
+
+
+`$ pip install django-extension`
+
+```python
+# settings.py
+INSTALLED_APP = [
+    'django_extension',
+]
+```
+
+`$ python manage.py shell_plus`
+
+--> import Article 하지 않아도 알아서 잡아줌
+
+
+
+리-다이렉트
+
+```python
+# views.py
+from django.shortcuts import render, redirect
+def create(request):
+    return redirect('/articles/')
+```
 
