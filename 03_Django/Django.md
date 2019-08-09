@@ -401,6 +401,10 @@ INSTALLED_APP = [
 
 
 
+CRUD
+
+C -> R -> D -> U
+
 리-다이렉트
 
 ```python
