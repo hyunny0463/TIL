@@ -858,8 +858,8 @@ align-items: center;<!-- 세로로 가운데 정렬 -->
 ```
 
 ```html
-<div class="item" style="align-self: flex-end">001</div> <!-- 단일 요소를 위쪽으로 -->
-<div class="item" style="align-self: flex-start">002</div> <!-- 단일 요소를 아래쪽으로 -->
+<div class="item" style="align-self: flex-end">001</div> <!-- 단일 요소를 아래쪽으로 -->
+<div class="item" style="align-self: flex-start">002</div> <!-- 단일 요소를 위쪽으로 -->
 ```
 
 
