@@ -49,8 +49,12 @@ View 중간 관리자
 vs-code 켤 때 자동으로 가상환경 설정되게 하는 법
 
 1. 작업할 폴더에서 vscode를 켠다.
-2.  `F1` 또는 `ctrl + shift + P`를 눌러서 `select interpreter` 를 적는다.
+
+2. `F1` 또는 `ctrl + shift + P`를 눌러서 `select interpreter` 를 적는다.
+
 3. `'venv': venv` 가 있는 설정을 선택한다.
+
+   
 
 
 
@@ -93,6 +97,8 @@ app 폴더 내에 templates 폴더를 만들고 모든 `.html` 파일을 넣어�
 ---
 
 url 분리
+
+이유: 
 
 똑같은 index.html 파일이 pages app 에도 있고, utilities app에도 있다면 installed_app에서 상위에 위치한 utilities app의 templates에 있는 index.html을 보여주는 현상이 있는데 이를 막으려면 app과 동일한 폴더를 templates 폴더 하위에 만들어서 모든 html을 넣는다.
 
@@ -167,12 +173,12 @@ SELECT * FROM table
 
 
 
-| SQL    | CRUD        |
-| ------ | ----------- |
-| SELECT | READ        |
-| CREATE | INSERT INTO |
-| UPDATE | UPDATE      |
-| DELETE | DELETE      |
+| SQL         | CRUD   |
+| ----------- | ------ |
+| SELECT      | READ   |
+| INSERT INTO | CREATE |
+| UPDATE      | UPDATE |
+| DELETE      | DELETE |
 
 
 
@@ -210,6 +216,22 @@ $ python manage.py makemigrations
 ```
 
 아직은 데이터베이스에 반영되지는 않았음 
+
+
+
+migrate commit 메시지 보기
+
+```
+$ python manage.py sqlmigrate articles 0001
+```
+
+
+
+migrate 상태보기(데이터베이스에 반영되었다면 앞에 [X] 표시가 뜸)
+
+``````
+$ python manage.py showmigrations
+``````
 
 
 
