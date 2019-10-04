@@ -98,13 +98,39 @@ app 폴더 내에 templates 폴더를 만들고 모든 `.html` 파일을 넣어�
 
 url 분리
 
-이유: 
+이유: 같은 이름의 `.html` 파일이 `templates`폴더 안에 있으면 `INSTALLED_APP`에 등록된 순서대로 파일을 띄워주기 때문에 각각의 namespace 를 구분해 주어야 한다.
 
 똑같은 index.html 파일이 pages app 에도 있고, utilities app에도 있다면 installed_app에서 상위에 위치한 utilities app의 templates에 있는 index.html을 보여주는 현상이 있는데 이를 막으려면 app과 동일한 폴더를 templates 폴더 하위에 만들어서 모든 html을 넣는다.
 
 하지만 templates 폴더 바로 하위에 있지 않기 때문에 기존의 소스코드는 오류가 난다.
 
 그러므로 views.py에 `return render(request, 'index.html')`에서 `return render(request, 'utilities/index.html')` 로 변경해준다.
+
+
+
+수 많은 소스코드에서 직접경로로 설정한 주소들을 바꾸기 위해 직접 하나하나 바꿔야 하는 어려움이 있다.
+
+이 문제를 해결하기 위한 방법
+
+```python
+# urls.py
+app_name = 'articles'
+urlpatterns = [ path('', views.index, name='index') ]
+```
+
+```html
+<!-- detail.html -->
+<a href "{% url 'index' %}">[메인 페이지]</a>
+<a href "{% url 'delete' article.pk %}">[글 삭제]</a>
+```
+
+```python
+# views.py
+return redirect('articles:index')
+return redirect('articles:detail', article.pk)
+```
+
+
 
 ---
 
