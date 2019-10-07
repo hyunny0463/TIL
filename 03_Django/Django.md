@@ -110,7 +110,7 @@ url 분리
 
 수 많은 소스코드에서 직접경로로 설정한 주소들을 바꾸기 위해 직접 하나하나 바꿔야 하는 어려움이 있다.
 
-이 문제를 해결하기 위한 방법
+이 문제를 해결하기 위한 방법 ( 경로에 대한 의존성을 없애기 위한 방법 )
 
 ```python
 # urls.py
@@ -134,7 +134,7 @@ return redirect('articles:detail', article.pk)
 
 ---
 
-Template Inheritance
+Template Inheritance(템플릿 상속, 확장)
 
 템플릿을 상속하기 위한 테스트
 
@@ -434,7 +434,7 @@ admin.site.register(Article, ArticleAdmin)
 
 
 
-`$ pip install django-extension`
+`$ pip install django-extensions ipython`
 
 ```python
 # settings.py
@@ -451,9 +451,11 @@ INSTALLED_APP = [
 
 CRUD
 
-C -> R -> D -> U
+Create -> Read -> Delete -> Update
 
-리-다이렉트
+render의 목적: 계층 구조를 만든다. html 파일을 사용자에게 보여줘야 할 때
+
+리-다이렉트: html 파일을 보여주더라도 해당 주소로 요청을 보내주어도 될 때
 
 ```python
 # views.py
@@ -462,3 +464,64 @@ def create(request):
     return redirect('/articles/')
 ```
 
+
+
+### 1.4. REST API
+
+#### 1.4.0. REST 구성
+
+
+
+1.4.0. REST 특징
+
+| 구분                                    |                             비고                             |
+| --------------------------------------- | :----------------------------------------------------------: |
+| Uniform                                 | Uniform Interface<br/>지정한 리소스에 대한 조작을 통일되고 한정적인 인터페이스로 활용 |
+| Stateless(무상태성)                     | 무상태성 성격을 가지고 있으며, 세션 정보나 쿠키 정보를 별도로 저장하지 않고 관리하여 단순하게 요청만을 처리 |
+| Cacheable(캐시가능)                     |                HTTP의 캐시 기능이 적용 가능함                |
+| Self-descriptiveness<br> (자체표현구조) |   REST API 메시지만 보고 상태와 행위를 쉽게 이해할 수 있음   |
+| Client - Server 구조                    |  클라이언트 서버에서 개발할 내용이 명확하고 의존성이 줄어듬  |
+| 계층형 구조                             |           REST 서버는 다중 계층으로 구성될 수 있음           |
+
+
+
+#### 1.4.0. REST 중심 규칙
+
+URI는 정보의 자원을 표현해야 한다.
+
+ex) `GET /users/1/read/` 는 불필요한 행위인 `read`가 포함되어 있음 자원을 표현하는데만 중점을 둬야함
+
+ex) `GET /users/1/create/` 에는 GET 메소드가 적절하지 않음
+
+자원에 대한 행위는 HTTP Method 로 표현한다.
+
+
+
+#### 1.4.1. HTTP 기본속성
+
+|             |                             비고                             |
+| :---------: | :----------------------------------------------------------: |
+|  Stateless  | 상태정보가 저장되지 않음. 즉, 요청 사이에는 연결고리가 없음.<br>클라이언트가 서버와 상호작용하기 위해서 HTTP 쿠키를 만들고,<br>상태가 있는 세션을 활용할 수 있도록 보완 |
+| Connectless |      서버에 요청을 하고 응답을 한 이후에 연결은 끊어짐.      |
+
+
+
+1.4.2. URL(Uniform Resource Locator)
+
+행위를 의미함
+
+1.4.3. URI(Uniform Resource Identifier)
+
+자원을 의미함
+
+
+
+1.4.4. HTTP 요청 메시지
+
+
+
+1.4.5. HTTP 응답 메시지
+
+
+
+### 1.5. RESTful(Representational State Transfer)
