@@ -4,5 +4,8 @@
     <h2 class="text-center">{{ person.name }} 님의 전생 직업은 {{ person.past_job }}</h2>
     <h3 class="text-center">GIPHY</h3>
     <img src="{{ image }}" alt="giphy-image">
+
+    <h3 class="text-center">NAVER IMAGE</h3>
+    <img src="{{ naver_image }}" alt="naver-image">
     <a href="{% url 'jobs:index' %}">내 전생의 직업이 또 있을까?</a>
 {% endblock %}

@@ -4,10 +4,29 @@
     <h2 class="text-center">DETAIL</h2>
     <h3>{{ article.pk }} 번째 글</h3>
     <hr>
+
     <p>글 제목: {{ article.title }}</p>
     <p>글 내용: {{ article.content }}</p>
     <p>글 생성 시각: {{ article.created_at|date:"SHORT_DATE_FORMAT" }}</p>
     <p>글 수정 시각: {{ article.updated_at|date:"M, j, Y" }}</p>
+    <hr>
+
+    <form action="{% url 'articles:comments_create' article.pk %}", method="POST">
+        {% csrf_token %}
+        <label for="content">COMMENT</label><br>
+        <input type="text" name="content", id="content"><br>
+        <input type="submit" value="댓글 작성" class="btn btn-warning">
+    </form>
+    <hr>
+
+    <p><b>댓글 목록</b></p>
+    {% for comment in article.comments.all %}
+        <li name="comment">{{ comment.content }}</li>
+        <form action="{% url 'articles:comments_delete' article.pk comment.pk %}", method="POST">
+            {% csrf_token %}
+            <input type="submit" value="댓글 삭제" class="btn btn-danger">
+        </form>
+    {% endfor %}
     <hr>
     <!-- <a href="/articles/{{ article.pk }}/delete/">[글 삭제]</a><br> -->
     <form action="{% url 'articles:delete' article.pk %}" method="POST">
