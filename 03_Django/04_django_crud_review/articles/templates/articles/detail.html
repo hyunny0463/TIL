@@ -19,15 +19,18 @@
     </form>
     <hr>
 
-    <p><b>댓글 목록</b></p>
+    <p><b>댓글 목록 ({{ article.comments.all|length }})</b></p>
     {% for comment in article.comments.all %}
         <li name="comment">{{ comment.content }}</li>
         <form action="{% url 'articles:comments_delete' article.pk comment.pk %}", method="POST">
             {% csrf_token %}
             <input type="submit" value="댓글 삭제" class="btn btn-danger">
         </form>
+        <a href="{% url 'articles:comments_update' article.pk comment.pk %}">[댓글 수정]</a>
+        <hr>
+    {% empty %}
+        <p><b>댓글이 없네유.... 댓글 좀 써주세유....</b></p>
     {% endfor %}
-    <hr>
     <!-- <a href="/articles/{{ article.pk }}/delete/">[글 삭제]</a><br> -->
     <form action="{% url 'articles:delete' article.pk %}" method="POST">
         {% csrf_token %}

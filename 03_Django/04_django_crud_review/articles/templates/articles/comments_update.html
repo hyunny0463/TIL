@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <h2 class="text-center">EDIT COMMNENT</h2>
+    <!-- <form action="/articles/{{ article.pk }}/update/" method="POST"> -->
+    <form action="" method="POST">
+        {% csrf_token %}
+        <label for="content">Content</label>
+        <input type="text" name="content" id="content" value="{{ comment.content }}"><br>
+        <input type="submit" value="댓글 수정" class="btn btn-primary">
+    </form>
+    <hr>
+    <!-- <a href="/articles/">[메인 페이지]</a> -->
+    <a href="{% url 'articles:index' %}">[메인 페이지]</a>
+{% endblock %}
