@@ -527,3 +527,4 @@ ex) `GET /users/1/create/` 에는 GET 메소드가 적절하지 않음
 
 
 ### 1.5. RESTful(Representational State Transfer)
+
