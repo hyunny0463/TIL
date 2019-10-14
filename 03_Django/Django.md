@@ -526,5 +526,62 @@ ex) `GET /users/1/create/` 에는 GET 메소드가 적절하지 않음
 
 
 
-### 1.5. RESTful(Representational State Transfer)
+
+
+### Static
+
+static 파일의 위치를 알려줌
+
+```python
+# settings.py
+# 웹 페이지에서 사용할 정적 파일의 최상위 URL 경로 (주의! 실제 파일이 위치한 디렉토리는 아님)
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE, 'crud', 'assets'), # 쉼표를 빼먹으면 오류가 난다!
+]
+```
+
+
+
+URL 분리와 같이 [APP]/static/[APP NAME]/images 에 이미지를 넣는다.
+
+```html
+{% extends 'base.html' %}
+{% load static %} <!-- 보편적으로 extends 아래에 넣는다. -->
+	<img src="{% static 'articles/images/bart.jpg' %}" alt="bart">
+
+```
+
+
+
+model에 이미지 정보를 저장하는 field 추가 하기
+
+```python
+class Article(models.Model):
+    # blank=True: 유효성 검사를 통과하기 위함. 정보없음이 아니라 빈 스트링이 들어가 있음
+    image = models.ImageField(blank=True)
+```
+
+
+
+python에서 파일의 정보를 받는 방법
+
+```python
+# views.py
+def craete(request):
+    image = request.FILES.get('image') # 이미지를 받아오기 위해서는 POST가 아닌 FILES
+```
+
+
+
+```html
+<!-- create.html -->
+<!-- enctype: 전송되는 데이터 형식을 지정한다 -->
+<!-- multipart/form-data: 파일이나 이미지를 전송할 경우 이 방식을 사용한다. -->
+<form action="{% url 'articles:create' %}" method="POST" enctype="multipart/form-data">
+	<label for="image">Image</label>
+	<input type="file" name="image" id="image"><br>
+    <input type="file" name="image" id="image" accept="image/*"><br> <!-- 이미지만 받음 -->
+</form>
+```
 
