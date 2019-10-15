@@ -61,18 +61,19 @@ def delete(request, article_pk):
 
     # return redirect('/articles/')
 
-def edit(request, pk):
-    article = Article.objects.get(pk=pk)
+def edit(request, article_pk):
+    article = Article.objects.get(pk=article_pk)
     context = {
         'article': article,
         }
     return render(request, 'articles/edit.html', context)
 
-def update(request, pk):
-    article = Article.objects.get(pk=pk)
+def update(request, article_pk):
+    article = Article.objects.get(pk=article_pk)
     if request.method == 'POST':
         article.title = request.POST.get('title')
         article.content = request.POST.get('content')
+        article.image = request.FILES.get('image')
         article.save()
         return redirect('articles:detail', article.pk)
     else:

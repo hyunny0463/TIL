@@ -576,6 +576,7 @@ def craete(request):
 
 ```html
 <!-- create.html -->
+
 <!-- enctype: 전송되는 데이터 형식을 지정한다 -->
 <!-- multipart/form-data: 파일이나 이미지를 전송할 경우 이 방식을 사용한다. -->
 <form action="{% url 'articles:create' %}" method="POST" enctype="multipart/form-data">
@@ -583,5 +584,145 @@ def craete(request):
 	<input type="file" name="image" id="image"><br>
     <input type="file" name="image" id="image" accept="image/*"><br> <!-- 이미지만 받음 -->
 </form>
+```
+
+
+
+####
+
+
+
+이미지 정보가 없는 정보는 오류가 생기는 데 no image 파일을 보여주는 방법으로 해결하는 방법
+
+```html
+{% load static %}
+{% if article.image %}
+	<img src="{{ article.image.url }}" alt="{{ artile.image }}">
+{% else %}
+	<img src="{% static 'articles/images/no_image.png' %}" alt="no-image">
+{% endif %}
+```
+
+
+
+이미지를 리-사이징 하기 위해 필요한 라이브러리
+
+```
+$ pip install pilkit django-imagekit
+```
+
+
+
+`settings.py`에 라이브러리 추가
+
+```python
+# settings.py
+INSTALLED_APPS = [
+    'imagekit',
+]
+```
+
+
+
+`models.py`에서 라이브러리 불러오기
+
+```python
+# modles.py
+from imagekit.models import ProcessedImageField
+from imagekit.processors import Thumbnail
+```
+
+
+
+라이브러리를 이용한 image resizing 저장 필드
+
+```python
+class Article(models.Model):
+	image = ProcessedImageField(
+        processors=[Thumbnail(200, 300)], # 처리할 이미지 사이즈
+        format='JPEG', # 저장 이미지 포맷
+        options={'quality': 90}, # 추가 옵션(원본의 90%로 압축)
+        upload_to='articles/images/', # MEDIA_ROOT(media)/articles/images
+    )
+```
+
+
+
+원본이미지를 저장하기 위한 라이브러리 불러오기
+
+```python
+from imagekit.models import ImageSpecField
+```
+
+
+
+이미지 저장과 썸네일 이미지 저장 필드
+
+```python
+class Article(models.Model):
+	image = models.ImageField(blank=True)
+    image_thumbnail = ImageSpecField(
+        source='image', # 원본 이미지 필드명
+        processors=[Thumbnail(200, 300)],
+        format='JPEG',
+        options={'quality':90},
+    )
+```
+
+
+
+이미지 저장경로를 동적으로 바꾸기
+
+#####
+
+
+
+## Form
+
+```python
+# froms.py
+from django import forms
+
+class ArticleForm(forms.Form):
+    title = forms.CharField(max_length=20)
+    content = forms.CharField()
+    content = forms.CharField(widget=forms.Textarea)
+```
+
+
+
+django가 알아서 input form 만들어주는 방법
+
+```python
+# views.py
+def create(request):
+    if request.method == 'POST':
+        form = ArticleForm(request.POST) # form 인스턴스를 생성하고 요청에 의한 데이터로 채운다.
+        if form.is_valid(): # 해당 폼이 유효한지 확인
+            # form.cleaned_data를 통해 폼 데이터를 정제한다. (form.cleaned_data -> Dict)
+            title = form.cleaned_data.get('title')
+            content = form.cleaned_data.get('content')
+            article = Article.objects.create(title=title, content=content)
+            return redirect('articles:detail', article.pk)
+    else:
+        form = ArticleForm()
+    context = {'form': form, }
+    return render(request, 'articles/create.html', context)
+```
+
+```html
+<!-- create.html -->
+{% block body %}
+	<form>
+        {{ form.as_p }}
+        
+        {% for field in form %}
+        	{{ field.label_tag}}
+        	{{ field }}
+        {% endfor %}
+        
+        {{ form.as_table }}
+	</form>
+{% endblock %}
 ```
 
