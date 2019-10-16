@@ -86,7 +86,7 @@ def comments_create(request, article_pk): # pk는 pk번 째 글을 의미함
     article = Article.objects.get(pk=article_pk)
     if request.method == 'POST':
         # article.comments.article = article
-        # article.comments.content = request.POST.get('content')
+        # article.comments.content = request.POST.get('content')F
         content = request.POST.get('content')
         comment = Comment(article=article, content=content)
         comment.save()

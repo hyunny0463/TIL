@@ -436,6 +436,12 @@ admin.site.register(Article, ArticleAdmin)
 
 `$ pip install django-extensions ipython`
 
+기존의 설치한 목록은
+
+ `$ pip freeze > requirements.txt` 로 저장하고 다른 폴더에 같은 환경을 이식하려면 `.txt` 파일을 옮기고
+
+  `$ pip install -r requirements.txt` 로 설치가능하다.
+
 ```python
 # settings.py
 INSTALLED_APP = [
@@ -679,6 +685,12 @@ class Article(models.Model):
 
 ## Form
 
+> Django에서 자동으로 만들어 주는 것을 제공함
+
+
+
+
+
 ```python
 # froms.py
 from django import forms
@@ -687,6 +699,64 @@ class ArticleForm(forms.Form):
     title = forms.CharField(max_length=20)
     content = forms.CharField()
     content = forms.CharField(widget=forms.Textarea)
+```
+
+```python
+# forms.py
+from django import forms
+
+class ArticleForm(forms.Form):
+    title = forms.CharField(
+        max_length=20,
+        label='제목',
+        widget=forms.TextInput(
+            attrs={
+                'class': 'my-title',
+                'placeholder': 'Enter the title!',
+            }
+        ),
+    )
+    content = forms.CharField(
+        label='내용',
+        widget=forms.Textarea(
+            attrs={
+                'class': 'my-content',
+                'placeholder': 'Enter the content!',
+                'rows': 5,
+                'cols': 50,
+            }
+        )
+    )
+```
+
+```python
+# forms.py
+from django import forms
+from .models import Article
+
+class ArticleForm(forms.ModelForm):
+    class Meta:
+        model = Article
+        fields = '__all__'
+```
+
+```python
+# forms.py
+from django import forms
+from .models import Article
+
+class ArticleForm(forms.ModelForm):
+    class Meta:
+        model = Article
+        fields = ('title', 'content', )
+        widgets = {
+            'title': forms.TextInput(
+                attrs={
+                    'class': 'my-title',
+                    'placeholder': 'Enter the title!',
+                }
+            )
+        }
 ```
 
 
@@ -724,5 +794,33 @@ def create(request):
         {{ form.as_table }}
 	</form>
 {% endblock %}
+```
+
+
+
+```
+$ pip install django-bootstrap4
+```
+
+```html
+<!-- base.html -->
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% bootstrap_css %}
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        {% block body %}
+        {% endblock %}
+    </div>
+    
+</body>
+</html>
 ```
 

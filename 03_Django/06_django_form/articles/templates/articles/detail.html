@@ -1,4 +1,5 @@
 {% extends 'articles/base.html' %}
+{% load bootstrap4 %}
 
 {% block body %}
     <h2>DETAIL</h2>
@@ -7,9 +8,22 @@
     <P>글 작성 시간: {{ article.created_at|date:"SHORT_DATE_FORMAT" }}</P>
     <P>글 수정 시간: {{ article.updated_at|date:"M, j, Y" }}</P>
     <hr>
+    
+    {% for comment in article.comments.all %}
+        <p>{{ comment }}</p>
+        <hr>
+    {% endfor %}
+    <form action="{% url 'articles:comments_create' article.pk %}" method="POST">
+        {% csrf_token %}
+        {{ comment_forms.as_p }}
+        {% buttons submit="Submit" %}{% endbuttons %}
+        <!-- <input type="submit" value="submit"> -->
+    </form>
+
     <form action="{% url 'articles:delete' article.pk %}" method="POST">
         {% csrf_token %}
         <input type="submit" value="글 삭제">
     </form>
+    <a href="{% url 'articles:update' article.pk %}">[글 수정]</a>
     <a href="{% url 'articles:index' %}">[메인 페이지]</a><br>
 {% endblock %}
