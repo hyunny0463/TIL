@@ -33,13 +33,12 @@ class Article(models.Model):
 
 class Comment(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='comments') # on_delete=models.CASCADE << 게시글이 삭제되면 댓글도 같이 사라지게 함 없으면 댓글만 떠다님
-    content = models.CharField(max_length=30)
+    content = models.CharField(max_length=140)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ['-pk', ]
+        ordering = ('-pk', )
 
     def __str__(self):
-        # return f'댓글: {self.content}'
-        return f'<Article({self.article_id}): Comment({self.pk} - {self.content})>'
+        return f'댓글: {self.content}'

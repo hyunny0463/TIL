@@ -9,15 +9,23 @@
     <P>글 수정 시간: {{ article.updated_at|date:"M, j, Y" }}</P>
     <hr>
     
+    <p><b>댓글 목록</b></p>
+    <p><b>현재까지 댓글 수: {{ article.comments.all.count }}</b></p>
+    <hr>
     {% for comment in article.comments.all %}
-        <p>{{ comment }}</p>
+        <p>댓글 {{ forloop.revcounter }} : {{ comment.content }}</p>
+        <form action="{% url 'articles:comments_delete' article.pk comment.pk %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="댓글 삭제" class="btn btn-warning">
+        </form>
         <hr>
+    {% empty %}
+        <p><b>댓글이 없네요 ㅠㅠ</b></p>
     {% endfor %}
     <form action="{% url 'articles:comments_create' article.pk %}" method="POST">
         {% csrf_token %}
-        {{ comment_forms.as_p }}
-        {% buttons submit="Submit" %}{% endbuttons %}
-        <!-- <input type="submit" value="submit"> -->
+        {{ comment_form }}
+        <input type="submit" class="btn btn-dark" value="submit">
     </form>
 
     <form action="{% url 'articles:delete' article.pk %}" method="POST">
