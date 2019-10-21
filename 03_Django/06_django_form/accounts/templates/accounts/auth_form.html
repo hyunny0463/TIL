@@ -1,0 +1,29 @@
+{% extends 'articles/base.html' %}
+{% load bootstrap4 %}
+
+{% block body %}
+    {% if request.resolver_match.url_name == 'signup' %}
+        <h1>SIGNUP</h1>
+    {% elif request.resolver_match.url_name == 'login' %}
+        <h1>LOGIN</h1>
+    {% elif request.resolver_match.url_name == 'update' %}
+        <h1>USER UPDATE</h1>
+    {% elif request.resolver_match.url_name == 'change_password' %}
+        <h1>CHANGE PASSWORD</h1>
+    {% endif %}
+    <form action="" method="POST">
+        {% csrf_token %}
+
+        {% bootstrap_form form %}
+        
+        {% if request.resolver_match.url_name == 'signup' %}
+            {% buttons submit="회원가입" reset="Cancel" %}{% endbuttons %}
+        {% elif request.resolver_match.url_name == 'login' %}
+            {% buttons submit="로그인" reset="Cancel" %}{% endbuttons %}
+        {% elif request.resolver_match.url_name == 'update' %}
+            {% buttons submit="회원정보 수정" reset="Cancel" %}{% endbuttons %}
+        {% elif request.resolver_match.url_name == 'change_password' %}
+            {% buttons submit="비밀번호 변경" reset="Cancel" %}{% endbuttons %}
+        {% endif %}
+    </form>
+{% endblock %}

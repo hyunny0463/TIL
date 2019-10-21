@@ -7,13 +7,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     {% bootstrap_css %}
+    <style>
+        div > h3 {
+            color: blueviolet;
+        }
+    </style>
     <title>Document</title>
 </head>
 <body>
     <div class="container">
+        {% if user.is_authenticated %}
+            <h3>Hello, {{ user.username }} | 
+                <a href="{% url 'accounts:logout' %}">LOGOUT</a> | 
+                <a href="{% url 'accounts:update' %}">USER UPDATE</a> | 
+                <a href="{% url 'accounts:change_password' %}">CHANGE PASSWORD</a>
+                <form action="{% url 'accounts:delete' %}" method="POST" style="display:inline">
+                    {% csrf_token %}
+                    <input type="submit" value="회원 탈퇴" class="btn btn-danger">
+                </form>
+
+            </h3>
+        {% else %}
+            <h3>
+                <a href="{% url 'accounts:login' %}">LOGIN</a> |
+                <a href="{% url 'accounts:signup' %}">SINGUP</a> |
+            </h3>
+        {% endif %}
+
         {% block body %}
         {% endblock %}
     </div>
-    
+    {% bootstrap_javascript jquery='full' %}
 </body>
 </html>

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <h2>INDEX</h2>
+    {% for article in articles %}
+        <p>번호: {{ article.pk }}</p>
+        <p>제목: {{ article.title }}</p>
+        <a href="{% url 'articles:update' article.pk %}">[글 수정]</a>
+        <form action="{% url 'articles:delete' article.pk %}">
+            <input type="submit" value="submit">
+        </form>
+    {% endfor %}
+    <a href="{% url 'articles:create' %}">[글 작성]</a>
+{% endblock %}
