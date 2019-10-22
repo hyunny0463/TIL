@@ -1,4 +1,5 @@
 {% load bootstrap4 %}
+{% load gravatar %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +18,8 @@
 <body>
     <div class="container">
         {% if user.is_authenticated %}
-            <h3>Hello, {{ user.username }} | 
+            <h3> <img src="https://s.gravatar.com/avatar/{{ user.email|makemk5 ]}?s=80&d=robohash" alt="gravatar">
+                Hello, {{ user.username }} | 
                 <a href="{% url 'accounts:logout' %}">LOGOUT</a> | 
                 <a href="{% url 'accounts:update' %}">USER UPDATE</a> | 
                 <a href="{% url 'accounts:change_password' %}">CHANGE PASSWORD</a>

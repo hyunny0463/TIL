@@ -13,25 +13,36 @@
     <p><b>현재까지 댓글 수: {{ article.comments.all.count }}</b></p>
     <hr>
     {% for comment in article.comments.all %}
+        <p><b>댓글 작성자: {{ comment.user }}</b></p>
         <p>댓글 {{ forloop.revcounter }} : {{ comment.content }}</p>
-        <form action="{% url 'articles:comments_delete' article.pk comment.pk %}" method="POST">
-            {% csrf_token %}
-            <input type="submit" value="댓글 삭제" class="btn btn-warning">
-        </form>
+        {% if comment.user == request.user %}
+            <form action="{% url 'articles:comments_delete' article.pk comment.pk %}" method="POST">
+                {% csrf_token %}
+                <input type="submit" value="댓글 삭제" class="btn btn-warning">
+            </form>
+        {% endif %}
         <hr>
     {% empty %}
         <p><b>댓글이 없네요 ㅠㅠ</b></p>
     {% endfor %}
-    <form action="{% url 'articles:comments_create' article.pk %}" method="POST">
-        {% csrf_token %}
-        {{ comment_form }}
-        <input type="submit" class="btn btn-dark" value="submit">
-    </form>
 
-    <form action="{% url 'articles:delete' article.pk %}" method="POST">
-        {% csrf_token %}
-        <input type="submit" value="글 삭제">
-    </form>
-    <a href="{% url 'articles:update' article.pk %}">[글 수정]</a>
+    {% if request.user.is_authenticated %}
+        <form action="{% url 'articles:comments_create' article.pk %}" method="POST">
+            {% csrf_token %}
+            {{ comment_form }}
+            <input type="submit" class="btn btn-dark" value="submit">
+        </form>
+    {% else %}
+        <a href="{% url 'accounts:login' %}">[댓글을 작성하려면 로그인 해주세요]</a>
+    {% endif %}
+
+    {% if article.user == request.user %}
+        <form action="{% url 'articles:delete' article.pk %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="글 삭제">
+        </form>
+            <a href="{% url 'articles:update' article.pk %}">[글 수정]</a>
+    {% endif %}
+    
     <a href="{% url 'articles:index' %}">[메인 페이지]</a><br>
 {% endblock %}
