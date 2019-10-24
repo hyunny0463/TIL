@@ -3,6 +3,10 @@
 
 {% block body %}
     <h2>DETAIL</h2>
+    <hr>
+    {% include "articles/_follow.html" %}
+    <hr>
+    <p>글 번호: {{ article.pk }}</p>
     <P>글 제목: {{ article.title }}</P>
     <P>글 내용: {{ article.content }}</P>
     <P>글 작성 시간: {{ article.created_at|date:"SHORT_DATE_FORMAT" }}</P>
