@@ -276,3 +276,30 @@
 // // 배열 내의 모든 요쇼가 주어진 함수를 통과하는지 테스트하고 결과에 따라 boolean을 return
 // const result2 = arr.every( elem => elem % 2 === 0)
 // console.log(result2)
+
+// // find Ex1.
+// // PEOPLE 중에 admin 권한을 가진 요소를 찾아서 admin 상수에 저장해보자!
+
+const PEOPLES = [
+  { id:1, admin: false },
+  { id:2, admin: false },
+  { id:3, admin: true },
+]
+
+const admin = PEOPLES.find(people => people.admin === true)
+console.log(admin)
+
+// some & every Ex1.
+const COMPUTERS = [
+  { name: 'macbook', ram: 16 },
+  { name: 'gram', ram: 8 },
+  { name: 'series9', ram:32 },
+]
+
+// 1. some
+const someComputersAvailable = COMPUTERS.some(computer => computer.ram > 16)
+console.log(someComputersAvailable)
+
+// 2. every
+const everyComputersAvailable = COMPUTERS.every(computer => computer.ram > 16)
+console.log(everyComputersAvailable)

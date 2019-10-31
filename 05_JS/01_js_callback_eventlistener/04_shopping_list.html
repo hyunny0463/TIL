@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <h1>My Shopping List</h1>
+  Enter a new item: <input type="text" onfocus="this.value=''" id="item-input">
+  <!-- <button id="add-button" onclick="document.getElementById('item-input').value=''">Add item</button> -->
+  <button id="add-button">Add item</button>
+  <ul id="shopping-list">
+
+  </ul>
+
+  <script> // DOM이 먼저 그려진 후에 script 실행 코드가 와야 함
+    const input = document.querySelector('#item-input')
+    const button = document.querySelector('#add-button')
+    const shoppingList = document.querySelector('#shopping-list')
+
+    // button 태그를 click 했을 때 사용자가 입력한 값을 itemName에 넣고
+    // input 태그의 value 속성을 초기화 시키자
+    button.addEventListener('click', function() {
+      const itemName = input.value
+      input.value = ''
+      // li 태그를 만들자
+      const item = document.createElement('li')
+      // li 태그에 사용자가 입력한 값을 넣자(innerText)
+      item.innerText = itemName
+
+      // DELETE 버튼 로직 구현
+      // 1. 버튼 태그 추가
+      const deleteButton = document.createElement('button')
+
+      // 2. deleteButton 변수에 delete 라는 텍스트를 추가하자!
+      deleteButton.innerText = 'delete'
+
+      // 3. item(li 태그)에 deleteButton을 추가하자 -> 아이템마다 delete 버튼이 필요
+      item.appendChild(deleteButton)
+
+      // 4. deleteButton 삭제 로직 구현
+      deleteButton.addEventListener('click', function() {
+        item.remove()
+      })
+      
+      shoppingList.append(item)
+    })
+  </script>
+</body>
+</html>
