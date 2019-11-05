@@ -1,0 +1,289 @@
+# Vue.js
+
+
+
+기존에는
+
+링크(a tag)를 사용해서 새로운 페이지를 받아온다
+
+모든 리소스를 (HTML, CSS, JS, Image)를 서버에서 가져온다
+
+
+
+AJAX(비동기 처리 라이브러리)
+
+비동기 요청
+
+: 앞의 수행이 뒤의 수행을 막지 않는다!
+
+요청을 보내 응답이 올 때까지 기다렸다가 응답이 오면 **그-때** 처리한다. <콜백함수의 핵심>
+
+
+
+왜 ?
+
+사용자가 언제 이벤트를 발생 시킬 지 알 수 없다.
+
+
+
+모든 페이지가 아닌 특정 부분(좋아요)만 비동기 요청으로 처리
+
+
+
+SPA(Single Page Application)
+
+: 모든 정적 리소스는 **최초 1번**만 받음
+
+새로운 페이지 요청시 페이지 갱신에 **필요한 데이터만** 전달 받음
+
+
+
+장점
+
+사용자 경험(UX) 극대화
+
+불필요한 서버 자원 사용x
+
+
+
+SPA
+
+구글에서 angular.js
+
+페이스북에서 react.js
+
+두 개의 장점을 합해 만든 것이 Vue.js
+
+
+
+Django -> MVC(MTV)
+
+Vue js -> MVVM(Model View(눈으로 보는 DOM) View Model)
+
+
+
+![image](https://user-images.githubusercontent.com/22102664/68168447-27480580-ffac-11e9-91d5-72f102bf3b69.png)
+
+
+
+시작하기
+
+```html
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        // Vue 코드가 작성될 곳
+    </script>
+</body>
+```
+
+
+
+DOM 과 vue instance가 binding 되어있다. 마운트가 되었다라고도 말한다.
+
+
+
+Vue Styling
+
+```html
+<body>
+    <div v-bind:style="{ color:activeColor, fontSize:fontSize + 'px' }">
+    Styling Test
+	<script>
+        data: {
+            activeColor: 'red',
+        }
+	</script>
+</body>
+```
+
+
+
+todo list
+
+```html
+<li v-for="todo in todos" v-bind:class="{ completed: todo.completed }">
+    <input type="checkbox" v-model=todo.completed>
+    <span>{{ todo.content }}</span>
+</li>
+<script>
+    const app = new Vue({
+      // DOM(View)와 Vue instance(View-Model)을 연결(mount)
+      el: '#app',
+      data: {
+        todos: [
+          {
+            content: '점심 메뉴 고민하기',
+            completed: true,
+          },
+        ]
+      }
+    })
+</script>
+```
+
+
+
+```
+v-if : 조건에 맞지 않으면 랜더링 조차 하지않음
+v-show : 일단 랜더링 하고 false 옵션이면 display: none 속성을 넣어줌
+```
+
+
+
+```
+# shortcut
+v-bind 는 : 만 찍음
+v-on 은 @ 만 찍고 사용가능
+```
+
+
+
+node.js 를 사용할 때 많은 패키지를 관리해주는 친구 npm (node package manager)
+
+```
+$ npm init
+```
+
+
+
+```
+$ npm install vue
+```
+
+
+
+커맨드 라인에서 디벨로퍼 기능을 사용하도록 웹팩을 설치
+
+```
+$ npm i webpack webpack-cli -D
+```
+
+
+
+웹팩을 설정하는 파일
+
+```
+$ touch webpack.config.js
+```
+
+```js
+// webpack.config.js
+const path = require('path')
+
+module.exports = {
+  // entry: 여러 개의 js 파일의 시작점. (웹팩이 파일을 읽기 시작하는 지점)
+  entry: {},
+  // module: 웹팩은 js만 변환이 가능하기 때문에 html, css 같으 모듈을 통해서 웹팩이 이해할 수 있는 것으로 변환을 해주는 곳.
+  module: {},
+  // plugins: 웹팩을 통해서 번들된 결과물을 추가적으로 처리하는 부분(옵션)
+  plugins: [],
+  // 여러 개의 js 파일을 하나로 만들어낸 결과물
+  output: {},
+}
+```
+
+
+
+
+
+this 키워드
+
+function 은 전역을 가리킨다, nested 하면 window를 가리킨다.
+
+arrow function 에서의 this는 상위 스코프를 가리킨다.
+
+
+
+전역에서 호출하면 this는 window를 반환한다.
+
+```javascript
+const greeting = function() {
+	console.log(this)
+}
+
+greeting()
+=> Window {parent: Window, postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, …}
+```
+
+
+
+you 라는 object 안에서 호출되므로 you를 가리킨다.
+
+```javascript
+const you = {
+	name: 'justin',
+	greeting
+}
+
+you.greeting()
+=> {name: "justin", greeting: ƒ}
+```
+
+
+
+arrow function 을 쓰면 this는 상위 객체를 가리킨다.
+
+```javascript
+const arrowGreeting = () => {
+	console.log(this)
+}
+const me = {
+	name: 'me',
+	arrowGreeting
+}
+```
+
+```javascript
+arrowGreeting()
+=> window {parent: Window, postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, …}
+me.arrowGreeting()
+=> window {parent: Window, postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, …}
+```
+
+
+
+```javascript
+const num = {
+	numbers: [1],
+	print: function() {
+		console.log(this)
+		console.log(this.numbers)
+		this.numbers.forEach(function(num) {
+			console.log(num)
+			console.log(this)
+        })
+    }
+}
+
+num.print()
+=> {numbers: Array(1), print: ƒ}
+=> [1]
+=> 1
+=> Window {parent: Window, postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, …}
+```
+
+
+
+
+
+```javascript
+const num2 = {
+	numbers: [1],
+	print: function() {
+		console.log(this)
+		console.log(this.numbers)
+		this.numbers.forEach( num => {
+			console.log(num)
+			console.log(this)
+        })
+    }
+}
+
+num2.print()
+=> {numbers: Array(1), print: ƒ}
+=> [1]
+=> 1
+=> {numbers: Array(1), print: ƒ}
+```
+
