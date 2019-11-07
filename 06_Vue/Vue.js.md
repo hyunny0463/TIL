@@ -139,52 +139,6 @@ v-on 은 @ 만 찍고 사용가능
 
 
 
-node.js 를 사용할 때 많은 패키지를 관리해주는 친구 npm (node package manager)
-
-```
-$ npm init
-```
-
-
-
-```
-$ npm install vue
-```
-
-
-
-커맨드 라인에서 디벨로퍼 기능을 사용하도록 웹팩을 설치
-
-```
-$ npm i webpack webpack-cli -D
-```
-
-
-
-웹팩을 설정하는 파일
-
-```
-$ touch webpack.config.js
-```
-
-```js
-// webpack.config.js
-const path = require('path')
-
-module.exports = {
-  // entry: 여러 개의 js 파일의 시작점. (웹팩이 파일을 읽기 시작하는 지점)
-  entry: {},
-  // module: 웹팩은 js만 변환이 가능하기 때문에 html, css 같으 모듈을 통해서 웹팩이 이해할 수 있는 것으로 변환을 해주는 곳.
-  module: {},
-  // plugins: 웹팩을 통해서 번들된 결과물을 추가적으로 처리하는 부분(옵션)
-  plugins: [],
-  // 여러 개의 js 파일을 하나로 만들어낸 결과물
-  output: {},
-}
-```
-
-
-
 
 
 this 키워드
@@ -285,5 +239,174 @@ num2.print()
 => [1]
 => 1
 => {numbers: Array(1), print: ƒ}
+```
+
+
+
+## webpack
+
+node.js 를 사용할 때 많은 패키지를 관리해주는 친구 npm (node package manager)
+
+```
+$ npm init
+```
+
+
+
+```
+$ npm install vue
+```
+
+
+
+커맨드 라인에서 디벨로퍼 기능을 사용하도록 웹팩을 설치
+
+```
+$ npm i webpack webpack-cli -D
+```
+
+
+
+웹팩을 설정하는 파일 - webpack.config.js 설정
+
+```
+$ touch webpack.config.js
+```
+
+```js
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const path = require('path')
+
+module.exports = {
+  // entry: 여러 개의 js 파일의 시작점. (웹팩이 파일을 읽기 시작하는 지점)
+  entry: {
+    app: path.join(__dirname, 'src', 'main.js')
+  },
+  // module: 웹팩은 js만 변환이 가능하기 때문에 html, css 같으 모듈을 통해서 웹팩이 이해할 수 있는 것으로 변환을 해주는 곳.
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        use: 'vue-loader',
+      }
+    ]
+  },
+  // plugins: 웹팩을 통해서 번들된 결과물을 추가적으로 처리하는 부분(옵션)
+  plugins: [
+    new VueLoaderPlugin(),
+  ],
+  // 여러 개의 js 파일을 하나로 만들어낸 결과물
+  output: {
+    filename: 'app.js',
+    path: path.join(__dirname, 'dist')
+  },
+}
+```
+
+
+
+```
+$ npm install vue-loader vue-template-compiler -D
+```
+
+```js
+// main.js
+// Vue instanace 를 최종적으로 만드는 파일
+// 연결되어 있는 모든 JS 파일의 최상단에 존재하는 파일
+
+// 1. npm install vue -> 추가(내가 만든 파일 아님)
+import Vue from 'vue'
+// 2. 최상위 컴포넌트 App.vue를 추가(내가 만들 파일)
+import App from './App.vue'
+
+// 3. Vue instance 를 만들어 DOM 에 연결
+new Vue({
+  render: h => h(App),
+}).$mount('#app')
+
+/*
+new Vue({
+  render: function(createElement) {
+    return createElement(App)
+  }
+})
+*/
+```
+
+
+
+package.json에 webpack 추가
+
+```json
+"scripts": {
+    "build": "webpack"
+},
+```
+
+
+
+빌드하기
+
+```
+$ npm run build
+```
+
+
+
+.vue 파일에서 사용할 css, vue-style 로더 설치
+
+```
+$ npm install vue-style-loader css-loader -D
+```
+
+
+
+webpack.config.js 파일에서 등록
+
+```js
+module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: ['vue-style-loader', 'css-loader']
+      }
+    ]
+  },
+```
+
+
+
+Webpack은 이렇게 할게 많지만 정리할 필요가 없었따! 안쓸거니깐
+
+
+
+## CLI(Command Line Interface)
+
+설치하기
+
+```
+$ npm i -g @vue/cli
+```
+
+
+
+프로젝트 만들기(default 선택)
+
+```
+$ vue create todo-vue-cli
+
+Vue CLI v4.0.5
+? Please pick a preset:
+> default (babel, eslint)
+  Manually select features
+```
+
+
+
+프로젝트로 이동한 후 실행
+
+```
+$ cd todo-vue-cli
+$ npm run serve
 ```
 
