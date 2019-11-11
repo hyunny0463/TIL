@@ -410,3 +410,222 @@ $ cd todo-vue-cli
 $ npm run serve
 ```
 
+
+
+
+
+## YouTube Project
+
+![image](https://user-images.githubusercontent.com/12672315/68556376-60351e00-0475-11ea-9ac9-a01e3de03e92.png)
+
+![image](https://user-images.githubusercontent.com/12672315/68556359-527f9880-0475-11ea-9ca7-9fd04034c530.png)
+
+등록한다
+
+```vue
+<!-- SearchBar.vue -->
+<script>
+    export default {
+        name: 'SearchBar',
+    }
+</script>
+```
+
+
+
+불러온다
+
+```vue
+<!-- App.vue -->
+<script>
+    import SearchBar from "./components/SearchBar"
+    
+    export default {
+        name: 'app',
+        components: {
+            SearchBar,
+        }
+    }
+</script>
+```
+
+
+
+사용자 컴포넌트를 사용한다
+
+```vue
+<!-- App.vue -->
+<template>
+	<div>
+        <search-bar></search-bar>
+    </div>
+</template>
+```
+
+
+
+console.log를 찍고 싶은데 에러가 난다?
+
+```json
+"eslintConfig": {
+    "rules": {
+      "no-console": "off" <<< 추가
+    },
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  }
+}
+```
+
+
+
+자식에서 부모로 데이터를 올려주는 emitting event
+
+```vue
+<!-- SearchBar.vue -->
+<script>
+export default {
+  name: 'SearchBar',
+  methods: {
+    onInput(e) {
+      this.$emit('inputChange', e.target.value)
+    }
+  },
+}
+</script>
+```
+
+
+
+부모에서 올려주는 데이터 받기
+
+```vue
+<!-- App.vue -->
+<template>
+	<div>
+        <search-bar @inputChange="onInputChange"></search-bar>
+    </div>
+</template>
+
+<script>
+import SearchBar from "./components/SearchBar"
+
+export default {
+  name: 'app',
+  components: {
+    SearchBar,
+  },
+  methods: {
+    onInputChange(inputValue) {
+      console.log(inputValue)
+    }
+  }
+}
+</script>
+```
+
+
+
+google api 사용하기
+
+```
+https://console.developers.google.com
+```
+
+으로 이동 후 youtube data api v3 사용하기
+
+
+
+사용자 인증 정보 만들기
+
+해당 키를 App.vue 에서 `const API_KEY = ''` 에 넣어줌
+
+
+
+axios 설치하기
+
+```
+$npm i axios
+```
+
+
+
+axios 모듈 import
+
+```
+import axios from 'axios'
+```
+
+
+
+youtube 검색 데이터 받기
+
+```vue
+export default {
+  methods: {
+    onInputChange(inputValue) {
+      axios.get(API_URL, {
+        params: {
+          // 1. (required) 위에서 가져온 키
+          key: API_KEY,
+          // 2. (option) 특정 리소스 유형만 검색(channel, playlist, video)
+          type: 'video',
+          // 3. (required) API 응답이 포함하는 search 리소스 속성
+          part: 'snippet',
+          // 4. (option) string -> 검색어(사용자에게 받은 input value)
+          q: inputValue
+        }
+      })
+      .then((response) => {
+        // console.log(response)
+        this.videos = response.data.items
+      })
+    }
+  }
+}
+```
+
+
+
+key 나누기
+
+```
+.env.local
+VUE_APP_YOUTUBE_API_KEY=''
+```
+
+
+
+```vue
+<!-- 환경변수 파일의 데이터 불러오기 -->
+<!-- App.vue -->
+const API_KEY = process.env.VUE_APP_YOUTUBE_API_KEY
+
+```
+
+
+
+App.vue에서 VideoList로 데이터 내려주기
+
+```
+<video-list :videos="videos"></video-list>
+```
+
+
+
+VideoList에서 데이터 받기
+
+```vue
+<!-- VideoList.vue -->
+export default {
+  name: 'VideoList',
+  props: {
+    videos: {
+      type: Array,
+      required: true,
+    }
+  }
+}
+```
+
