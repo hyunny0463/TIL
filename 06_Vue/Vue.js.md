@@ -629,3 +629,34 @@ export default {
 }
 ```
 
+
+
+
+
+
+
+## JWT (Json Web Token)
+
+xxxx.yyyy.zzzz 형태임 각각 heaer, payload, verify signature
+
+- header: token의 type과 사용 algorithm
+- payload: 토큰에 담길 정보가 들어있는 곳(claim - key:value)
+- verify signature: header
+
+-->  라이브러리를 사용하면 알아서 JWT를 생성해주기 때문에 우리가 신경쓸 건 없다.
+
+왜 쓰냐? XML 기반의 SAML에 비해 구조가 덜 복잡하고 보안이 매우 뛰어남
+
+
+
+SPA의 가장 큰 장점
+
+페이지의 전환이 많지 않아서 사용자 입장에서 매우 빠르다.
+
+단점 주소의 이동이 없으니까 기록이 없다.
+
+
+
+## Django & Vue
+
+vue ui <<< ui로 프로젝트를 쉽게 만드는 듯

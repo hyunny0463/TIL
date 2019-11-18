@@ -10,18 +10,31 @@
 </head>
 <body>
   <div id="app">
-    <input type="text" v-model="url">
-    <a :href="url">Go !</a>
+    <button v-on:click="getPosts">Get Posts!</button>
+
+    <ul>
+      <li v-for="postTitle in postTitles">{{postTitle.title}}</li>
+    </ul>
   </div>
 
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script>
   const app = new Vue({
     el: '#app',
     data: {
-      url: '',
+      dogCount: 1,
+      postTitles: [],
     },
     methods: {
+      getPosts: function() {
+        const URL = 'https://jsonplaceholder.typicode.com/posts'
+        axios.get(URL)
+        .then(res => {
+          this.postTitles = res.data
+          console.log(postTitles)
+        })
+      }
     }
   })
   </script>
