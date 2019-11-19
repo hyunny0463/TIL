@@ -5,7 +5,7 @@
       <span class="sr-only">Loading...</span>
     </div>
 
-    <div v-else class="login-form">
+    <form v-else class="login-form" @submit.prevent="login">
       <div v-if="errors.length" class="error-list alert alert-danger">
         <h4>다음의 오류를 해결해주세요.</h4>
         <hr>
@@ -19,7 +19,6 @@
         id="id"
         placeholder="아이디를 입력해주세요."
         v-model="credentials.username"
-        @keyup.enter="login"
         >
       </div>
       <div class="form-group">
@@ -30,16 +29,16 @@
         id="password"
         placeholder="비밀번호를 입력해주세요."
         v-model="credentials.password"
-        @keyup.enter="login"
         >
       </div>
-      <button class="btn btn-primary" @click="login">로그인</button>
-    </div>
+      <button type="submit" class="btn btn-primary">로그인</button>
+    </form>
   </div>
 </template>
 
 <script>
 import axios from "axios"
+import router from "../router"
 
 export default {
   name: 'LoginForm',
@@ -61,11 +60,15 @@ export default {
         if (this.checkForm()) {
           this.loading = true
           // 3. credentials(username, password) 정보를 담아 Django 서버로 요청을 보낸다.
-          axios.get('http://127.0.0.1:8000/', this.credentials)
+          axios.post('http://127.0.0.1:8000/api-token-auth/', this.credentials)
           .then(res => {
+            this.$session.start()
+            this.$session.set('jwt', res.data.token)
+            router.push('/')
             console.log(res)
           })
           .catch(err => {
+            this.loading = false
             console.log(err)
           })
         }

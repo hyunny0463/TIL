@@ -657,6 +657,18 @@ SPA의 가장 큰 장점
 
 
 
+## CORS (Cross-Origin Resource Sharing)
+
+즉, 도메인/포트가 다른 서버의 자원을 요청 매커니즘
+
+하지만 브라우저에서 보안의 이유로 차단함
+
+우리는 이제까지 어떻게 했나요? CORS 정책을 통해 서버에서 허용해주면 가능!
+
+서버(Django)에서 cross-origin HTTP 요청 허가(whitelisting)
+
+
+
 ## Django & Vue
 
 vue ui <<< ui로 프로젝트를 쉽게 만드는 듯

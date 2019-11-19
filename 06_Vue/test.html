@@ -10,10 +10,11 @@
 </head>
 <body>
   <div id="app">
-    <button v-on:click="getPosts">Get Posts!</button>
-
+    <button @click="getPosts">Get Posts!</button>
     <ul>
-      <li v-for="postTitle in postTitles">{{postTitle.title}}</li>
+      <li v-for="(post, idx) in posts" :key="idx"> 
+        <b>{{ post.title }}</b> - {{ post.body }}
+      </li>
     </ul>
   </div>
 
@@ -23,20 +24,24 @@
   const app = new Vue({
     el: '#app',
     data: {
-      dogCount: 1,
-      postTitles: [],
+      posts: [],
     },
     methods: {
-      getPosts: function() {
+      getPosts() {
         const URL = 'https://jsonplaceholder.typicode.com/posts'
         axios.get(URL)
         .then(res => {
-          this.postTitles = res.data
-          console.log(postTitles)
+          this.posts = res.data
         })
       }
     }
   })
   </script>
 </body>
+<style>
+  img {
+    width: 200px;
+    height: 200px;
+  }
+</style>
 </html>
