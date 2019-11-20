@@ -1,16 +1,50 @@
 <template>
-  <div id="app">
+  <div id="app" class="container">
     <div id="nav">
-      <!-- 라우터 지원 웹에서 사용자 네이게이션을 가능하게 하는 컴포넌트, 목표 위치는 to로 지정 -->
-      <router-link to="/">Home</router-link> |
-      <router-link to="/login">Login</router-link>
+      <!-- <div v-if="isAutenticated"> -->
+      <div v-if="isLoggedIn">
+        <!-- 라우터 지원 웹에서 사용자 네이게이션을 가능하게 하는 컴포넌트, 목표 위치는 to로 지정 -->
+        <router-link to="/">Home</router-link> |
+        <a @click.prevent="logout" href="#">Logout</a>
+      </div>
+      <div v-else>
+        <router-link to="/login">Login</router-link> |
+        <router-link to="/register">Register</router-link>
+      </div>
     </div>
     <!-- 특정 라우팅 경로에 맞는 component가 render 되는 자리 -->
-    <div class="container col-6">
-      <router-view/>
+    <div class="row justify-content-center">
+      <router-view class="col-6" />
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'App',
+  // data() {
+  //   return {
+  //     isAutenticated: this.$session.has('jwt')
+  //   }
+  // },
+  // updated() {
+  //   this.isAutenticated = this.$session.has('jwt')
+  // },
+
+  computed: {
+    isLoggedIn: function() {
+      return this.$store.getters.isLoggedIn
+    }
+  },
+  methods: {
+    logout() {
+      // this.$session.destroy()
+      this.$store.dispatch('logout')
+      this.$router.push('/login')
+    }
+  }
+}
+</script>
 
 <style>
 #app {

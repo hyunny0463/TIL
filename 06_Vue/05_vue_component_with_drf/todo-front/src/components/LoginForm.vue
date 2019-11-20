@@ -48,8 +48,13 @@ export default {
         username: '',
         password: '',
       },
-      loading: false,
+      // loading: false,
       errors: [],
+    }
+  },
+  computed: {
+    loading: function() {
+      return this.$store.state.loading
     }
   },
   methods: {
@@ -57,21 +62,22 @@ export default {
       // 1. 로그인 유효성 검사가 끝나면
       if (this.checkForm()) {
         // 2. loading의 상태를 true로 변경하고 (spinner-border 돈다.)
-        if (this.checkForm()) {
-          this.loading = true
-          // 3. credentials(username, password) 정보를 담아 Django 서버로 요청을 보낸다.
-          axios.post('http://127.0.0.1:8000/api-token-auth/', this.credentials)
-          .then(res => {
-            this.$session.start()
-            this.$session.set('jwt', res.data.token)
-            router.push('/')
-            console.log(res)
-          })
-          .catch(err => {
-            this.loading = false
-            console.log(err)
-          })
-        }
+        this.$store.dispatch('startLoading')
+        // this.loading = true
+        // 3. credentials(username, password) 정보를 담아 Django 서버로 요청을 보낸다.
+        axios.post('http://127.0.0.1:8000/api-token-auth/', this.credentials)
+        .then(res => {
+          // this.$session.start()
+          this.$store.dispatch('endLoading')
+          this.$store.dispatch('login', res.data.token)
+          // this.$session.set('jwt', res.data.token)
+          router.push('/')
+        })
+        .catch(err => {
+          // this.loading = false
+          this.$store.dispatch('endLoading')
+          console.log(err)
+        })
       }
       else {
         console.log('로그인 실패')
